@@ -1,21 +1,33 @@
-# SDL-redblack-tree-visualizer
-goal 
-   Implement a Red-Black Tree data structure and visualize its operations using the SDL_Plotter class. The primary goal is to understand the properties of Red-Black Trees, implement the insertion, deletion, and rebalancing operations, and create a visual representation of the tree using SDL_Plotter.
+# SDL-RedBlack-Tree-Visualizer
 
-Naming Conventions
+## Goal
+The goal of this project is to implement a Red-Black Tree data structure and visualize its operations using the `SDL_Plotter` class. The primary objectives are:
 
-Documentation Standard
- Comments
- Comment all code that is not super simple and straightfoward
- Comments must explain what is happening and why
- Function Block Comments
- //*
+- To understand the properties of Red-Black Trees.
+- Implement insertion, deletion, and rebalancing operations.
+- Create a visual representation of the tree using `SDL_Plotter`.
+
+## Naming Conventions
+
+### Documentation Standard
+
+#### Comments
+- Comment all code that is not simple and straightforward.
+- Comments must explain **what** is happening and **why**.
+
+#### Function Block Comments
+/*
  * description:
  * return:
  * precondition:
- * postcondition: 
- *
+ * postcondition:
  */
-   
-requirements 
-  SDL2 and SDL_MIXER
+
+Requirements
+
+SDL2
+SDL_MIXER
+javascript
+Copy code
+
+Just copy this content and save it as `README.md` in your project folder.
