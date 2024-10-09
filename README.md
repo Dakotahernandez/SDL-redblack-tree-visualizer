@@ -9,7 +9,7 @@ Documentation Standard
  Comment all code that is not super simple and straightfoward
  Comments must explain what is happening and why
  Function Block Comments
- /*
+ //*
  * description:
  * return:
  * precondition:
