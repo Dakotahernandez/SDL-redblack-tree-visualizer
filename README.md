@@ -27,7 +27,3 @@ Requirements
 
 SDL2
 SDL_MIXER
-javascript
-Copy code
-
-Just copy this content and save it as `README.md` in your project folder.
