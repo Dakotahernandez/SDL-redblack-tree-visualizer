@@ -5,17 +5,17 @@ goal
 Naming Conventions
 
 Documentation Standard
-   Comments 
-      Comment all code that is not super simple and straightfoward
-      Comments must explain what is happening and why
-   Function Block Comments
-      /*
-       * description:
-       * return:
-       * precondition:
-       * postcondition: 
-       *
-      */
+ Comments
+ Comment all code that is not super simple and straightfoward
+ Comments must explain what is happening and why
+ Function Block Comments
+ /*
+ * description:
+ * return:
+ * precondition:
+ * postcondition: 
+ *
+ */
    
 requirements 
   SDL2 and SDL_MIXER
