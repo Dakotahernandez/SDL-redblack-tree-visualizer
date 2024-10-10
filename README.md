@@ -7,7 +7,12 @@ The goal of this project is to implement a Red-Black Tree data structure and vis
 - Implement insertion, deletion, and rebalancing operations.
 - Create a visual representation of the tree using `SDL_Plotter`.
 
-## Naming Conventions
+## To do list 
+1)get sdl working on everything on everyones computers 
+2)understand redblack trees
+3)build working redblack tree
+4)have sdl screen recieve data that effects red black tree
+5)have sdl display trew
 
 ### Documentation Standard
 
