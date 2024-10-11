@@ -36,7 +36,7 @@ SDL2
 SDL_MIXER
 
 ##### How to add and set up SDL2 and SDL_Mixer on xcode on mac
-1)if you dont have homebrew download in your terminal using the following command 
+1)if you dont have homebrew download in your terminal using the following command <br />
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 2)download SDL2 and the mixer in your terminal using homebrew use the following command
 brew install sdl2 sdl2_mixer
