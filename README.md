@@ -8,11 +8,11 @@ The goal of this project is to implement a Red-Black Tree data structure and vis
 - Create a visual representation of the tree using `SDL_Plotter`.
 
 ## To do list 
-1)get sdl working on everything on everyones computers 
-2)understand redblack trees
-3)build working redblack tree
-4)have sdl screen recieve data that effects red black tree
-5)have sdl display trew
+-get sdl working on everything on everyones computers 
+-understand redblack trees
+-build working redblack tree
+-have sdl screen recieve data that effects red black tree
+-have sdl display trew
 
 ### Documentation Standard
 
