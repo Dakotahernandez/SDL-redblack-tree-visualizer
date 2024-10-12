@@ -7,17 +7,17 @@ The goal of this project is to implement a Red-Black Tree data structure and vis
 - Implement insertion, deletion, and rebalancing operations.
 - Create a visual representation of the tree using `SDL_Plotter`.
 
-## To do list 
--get sdl working on everything on everyones computers 
--understand redblack trees
--build working redblack tree
--have sdl screen recieve data that effects red black tree
--have sdl display trew
+## To do list <br />
+-get sdl working on everything on everyones computers <br />
+-understand redblack trees<br />
+-build working redblack tree<br />
+-have sdl screen recieve data that effects red black tree<br />
+-have sdl display tree<br />
 
 ### Documentation Standard
 
 #### Comments
-- Comment all code that is not simple and straightforward.
+- Comment all code that is not simple and straightforward.<br />
 - Comments must explain **what** is happening and **why**.
 
 #### Function Block Comments
@@ -36,12 +36,12 @@ SDL2
 SDL_MIXER
 
 ##### How to add and set up SDL2 and SDL_Mixer on xcode on mac
-1)if you dont have homebrew download in your terminal using the following command <br />
+**1)**if you dont have homebrew download in your terminal using the following command <br />
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" <br /> <br />
-2)download SDL2 and the mixer in your terminal using homebrew use the following command <br />
+**2)**download SDL2 and the mixer in your terminal using homebrew use the following command <br />
 brew install sdl2 sdl2_mixer  <br /> <br />
-3)Create a new xcode project:set as a command line tool using c++ <br /> <br />
-4) Link SDL2 and SDL2_mixer Binary Libraries in Xcode <br />
+**3)**Create a new xcode project:set as a command line tool using c++ <br /> <br />
+**4)** Link SDL2 and SDL2_mixer Binary Libraries in Xcode <br />
 You need to link the SDL2 and SDL2_mixer binary libraries to your Xcode project. <br />
 In Xcode, select your project from the Project Navigator (left panel). <br />
 Under Targets, select your project target (usually the same name as your project). <br />
@@ -51,7 +51,7 @@ Choose Add Other <br />
 once the tab comes up use the keybind command + shift + G <br />
 then search /opt/homebrew/lib  <br /> <br />
 Add libSDL2.dylib and libSDL2_mixer.dylib to your project(it will say open instead of add but it will add) <br />
-5)Set Up Header Search Paths <br />
+**5)**Set Up Header Search Paths <br />
 Select your project in the Project Navigator (left-hand side). <br />
 Go to the Build Settings tab. <br />
 In the search bar, type Header Search Paths. <br />
@@ -59,13 +59,13 @@ Double-click on Header Search Paths and add the following paths: <br />
 For SDL2: /opt/homebrew/include  <br />
 For SDL2_mixer: /opt/homebrew/include/SDL2 <br />
 leave both as non recursive <br /> <br />
-6)Set Up Library Search Paths <br />
+**6)**Set Up Library Search Paths <br />
 In Build Settings, search for Library Search Paths. <br />
 Double-click Library Search Paths and add  <br />
 For SDL2: /opt/homebrew/include  <br />
 For SDL2_mixer: /opt/homebrew/include/SDL2 <br />
 non recursive again <br /> <br />
-7)finally theres been a recent update to the SDL libraies so their signauture is diffrent <br />
+**7)**finally theres been a recent update to the SDL libraies so their signauture is diffrent <br />
 and flagged by apple security so you must turn off signature checking  <br />
 Select your project in the Project Navigator (the left panel). <br />
 Go to the "Signing & Capabilities" Tab: <br />
