@@ -51,8 +51,10 @@ Go to the Build Phases tab. <br />
 In the Link Binary With Libraries section, click the + button. <br />
 Choose Add Other <br />
 once the tab comes up use the keybind command + shift + G <br />
-then search /opt/homebrew/lib  <br /> 
-Add libSDL2.dylib and libSDL2_mixer.dylib to your project(it will say open instead of add but it will add) <br /><br />
+then search  <br /> 
+/opt/homebrew/opt/sdl2_mixer/lib/    <br /> 
+/opt/homebrew/opt/sdl2/lib    <br /> 
+Add libSDL2_mixer-2.0.0.dylib and libSDL2-2.0.0.dylib to your project(it will say open instead of add but it will add) <br /><br />
 5)Set Up Header Search Paths <br />
 Select your project in the Project Navigator (left-hand side). <br />
 Go to the Build Settings tab. <br />
