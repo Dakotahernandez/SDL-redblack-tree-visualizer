@@ -95,6 +95,7 @@ Under Security, you’ll find the Disable Library Validation option. <br />
 Enable it by checking the box next to Disable Library Validation. <br />
  <br />
 the SDL is now properlly connected <br />
+copy paste SDL_test_run.txt into your main
 now clean your build (shift + command + k) <br />
 try and build (shift + command + b)it before running to try and make sure there are no error <br />
 if it builds safely run it(command + r) <br /> <br />
