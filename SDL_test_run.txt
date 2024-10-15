@@ -1,0 +1,63 @@
+#include <SDL2/SDL.h>
+#include <iostream>
+
+int main(int argc, char* argv[]) {
+    // Initialize SDL
+    if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+        std::cerr << "SDL could not initialize! SDL_Error: " << SDL_GetError() << std::endl;
+        return 1;
+    }
+
+    // Create a 1000x1000 window
+    SDL_Window* window = SDL_CreateWindow("SDL Test", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1000, 1000, SDL_WINDOW_SHOWN);
+    if (window == nullptr) {
+        std::cerr << "Window could not be created! SDL_Error: " << SDL_GetError() << std::endl;
+        SDL_Quit();
+        return 1;
+    }
+
+    // Create a renderer for the window
+    SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    if (renderer == nullptr) {
+        std::cerr << "Renderer could not be created! SDL_Error: " << SDL_GetError() << std::endl;
+        SDL_DestroyWindow(window);
+        SDL_Quit();
+        return 1;
+    }
+
+    // Set the draw color to red (255, 0, 0, 255)
+    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+
+    // Clear the screen with the red color
+    SDL_RenderClear(renderer);
+
+    // Present the red screen
+    SDL_RenderPresent(renderer);
+
+    // Event handling to keep the window open until Esc is pressed
+    SDL_Event event;
+    bool quit = false;
+    while (!quit) {
+        while (SDL_PollEvent(&event) != 0) {
+            // User requests to quit
+            if (event.type == SDL_QUIT) {
+                quit = true;
+            }
+            // Keydown event
+            else if (event.type == SDL_KEYDOWN) {
+                // Check if the key pressed is Esc
+                if (event.key.keysym.sym == SDLK_ESCAPE) {
+                    quit = true;
+                }
+            }
+        }
+    }
+
+    // Clean up
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+    SDL_Quit();
+
+    return 0;
+}
+
