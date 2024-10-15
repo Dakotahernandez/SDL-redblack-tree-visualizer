@@ -60,6 +60,7 @@ Select your project in the Project Navigator (left-hand side). <br />
 Go to the Build Settings tab. <br />
 In the search bar, type Header Search Paths. <br />
 Double-click on Header Search Paths and add the following paths: <br />
+Add debug and release <br />
 For SDL2: /opt/homebrew/include  <br />
 For SDL2_mixer: /opt/homebrew/include/SDL2 <br />
 leave both as non recursive <br /> <br />
