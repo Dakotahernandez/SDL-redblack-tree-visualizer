@@ -1,3 +1,6 @@
+/*
+This code is for testing sdl to make sure it can run by itself no extra files
+*/
 #include <SDL2/SDL.h>
 #include <iostream>
 
