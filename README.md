@@ -34,7 +34,7 @@ Requirements
 SDL2
 SDL_MIXER
 
-##### How to add and set up SDL2 and SDL_Mixer on xcode on mac
+##### How to add and set up SDL2 and SDL_Mixer on xcode on mac(confirmed working on m2 macbook air and and m2 pro)
 1)if you dont have homebrew download in your terminal using the following command <br />
 
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)
