@@ -21,14 +21,13 @@ The goal of this project is to implement a Red-Black Tree data structure and vis
 - Comments must explain **what** is happening and **why**.
 
 #### Function Block Comments
-/*
+"/*
  * description:
  * return:
  * precondition:
  * postcondition:
-
  * 
- */
+ */"
 
 Requirements
 
