@@ -40,14 +40,14 @@ SDL_MIXER
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)
 <br /> <br />
 
-**2)**download SDL2 and the mixer in your terminal using homebrew use the following command <br />
+2)download SDL2 and the mixer in your terminal using homebrew use the following command <br />
 brew install sdl2 sdl2_mixer  <br /> <br />
 
 
 3)Create a new xcode project:set as a command line tool using c++ <br /> <br />
 
 
-4) Link SDL2 and SDL2_mixer Binary Libraries in Xcode <br />
+4)Link SDL2 and SDL2_mixer Binary Libraries in Xcode <br />
 You need to link the SDL2 and SDL2_mixer binary libraries to your Xcode project. <br />
 In Xcode, select your project from the Project Navigator (left panel). <br />
 Under Targets, select your project target (usually the same name as your project). <br />
