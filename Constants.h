@@ -22,8 +22,8 @@
 #define Constants_h
 
 //size of screen displaying our redblack tree
-const int WINDOW_WIDTH = 800;
-const int WINDOW_HEIGHT = 600;
+const int WINDOW_WIDTH = 1200;
+const int WINDOW_HEIGHT = 1000;
 
 //color constants so there are consitant colors throughout project
 const color BROWN                      (165,42,42);
