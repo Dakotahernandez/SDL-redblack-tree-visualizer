@@ -17,14 +17,10 @@
 
 #include "SDL_Plotter.h"
 #include "Red_Black_Tree.h"
+#include "Constants.h"
 #include <cmath>
 
 // Constants for color and spacing
-const color RED_COLOR = {255, 0, 0};
-const color BLACK_COLOR = {0, 0, 0};
-const color LINE_COLOR = {150, 150, 150};
-const int NODE_RADIUS = 15;
-const int VERTICAL_GAP = 50;
 
 // Class to display a Red-Black Tree using SDL_Plotter
 template <typename T>
@@ -86,7 +82,12 @@ private:
         if (node == nullptr) return;
 
         // Determine color based on node color
-        color nodeColor = (node->color == NODE_RED) ? RED_COLOR : BLACK_COLOR;
+        color nodeColor;
+        if (node->color == NODE_RED) {
+            nodeColor = RED;
+        } else {
+            nodeColor = BLACK;
+        }
 
         // Draw the current node
         drawCircle(x, y, radius, nodeColor);
