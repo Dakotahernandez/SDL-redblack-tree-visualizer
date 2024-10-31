@@ -18,18 +18,21 @@
 #include <iostream>
 using namespace std;
 
+// Constants for node color
+constexpr char NODE_RED = 'R';
+constexpr char NODE_BLACK = 'B';
+
 template <typename T>
 struct Node {
+    T value;                // Data contained in the node
     Node<T>* left;          // Pointer to left child node
     Node<T>* right;         // Pointer to right child node
-    T data;                 // Data contained in the node
-    char color;             // 'R' for Red, 'B' for Black, 'U' for undecided
+    Node<T>* parent;        // Pointer to parent node
+    char color;             // 'R' for Red, 'B' for Black
 
-    // Constructor with default arguments for left, right, and color
-    Node(T data, Node<T>* left = nullptr, Node<T>* right = nullptr, char color = 'U')
-        : data(data), left(left), right(right), color(color) {}
+    // Constructor with default arguments for left, right, parent, and color
+    Node(T value, Node<T>* left = nullptr, Node<T>* right = nullptr, Node<T>* parent = nullptr, char color = NODE_RED)
+        : value(value), left(left), right(right), parent(parent), color(color) {}
 };
 
 #endif /* NODE_H */
-
-
