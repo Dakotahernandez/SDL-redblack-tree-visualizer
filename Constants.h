@@ -23,7 +23,7 @@
 
 //size of screen displaying our redblack tree
 const int WINDOW_WIDTH = 1200;
-const int WINDOW_HEIGHT = 1000;
+const int WINDOW_HEIGHT = 800;
 
 //color constants so there are consitant colors throughout project
 const color BROWN                      (165,42,42);
