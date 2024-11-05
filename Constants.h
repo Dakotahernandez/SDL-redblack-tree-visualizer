@@ -1,7 +1,6 @@
 /*
 * Authors:
    Dakota Hernandez
-   Griffin Roe
    Sofia Amador
    Anjan Godavarti
 * Assignment Title: CSI 3334 Group Project
