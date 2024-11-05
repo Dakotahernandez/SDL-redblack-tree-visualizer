@@ -4,8 +4,6 @@
    Griffin Roe
    Sofia Amador
    Anjan Godavarti
-   Mason Baxter
-   Jonah Beck
 * Assignment Title: CSI 3334 Group Project
 * Assignment Description: Using SDL, create a red-black tree visualizer using SDL
 * Due Date: 12/10/2024
