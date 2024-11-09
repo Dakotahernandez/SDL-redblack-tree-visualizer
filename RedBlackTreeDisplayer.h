@@ -49,7 +49,31 @@ private:
             }
         }
     }
-
+//SOFIA ANIMATION CIRCLE
+    /*
+#include <ctime>
+    void drawXXCircle(int x, int y, int radius, color c) {
+        const int maxRadiusIncrease = 10; // Maximum amount circle grows
+        const double speed = 2.0;
+        static clock_t startTime = clock();
+        double elapsedTime = (double)(clock() - startTime) / CLOCKS_PER_SEC;
+        int dynamicRadius = radius + maxRadiusIncrease * fabs(sin(elapsedTime * speed));
+        
+            
+            for (int w = 0; w < dynamicRadius * 2; w++) {
+                for (int h = 0; h < dynamicRadius * 2; h++) {
+                    int dx = dynamicRadius - w;
+                    int dy = dynamicRadius - h;
+                    if ((dx * dx + dy * dy) <= (dynamicRadius * dynamicRadius)) {
+                        plotter.plotPixel(x + dx, y + dy, c.R, c.G, c.B);
+                    }
+                }
+            }
+            
+        
+        
+    }
+    */
     // Draws a line between two points (for edges between nodes)
     void drawLine(int x1, int y1, int x2, int y2, color c) {
         int dx = abs(x2 - x1);
