@@ -39,6 +39,7 @@ int main(int argc, char** argv) {
          have a while loop that waits til theres a mouse click in either box
          then recieves input and does command.<-- this will more likley get us a
          better grade
+         or a kbhit function with i for insert and r for remove
          */
 
         cout << "Press I to insert and R to remove: ";
