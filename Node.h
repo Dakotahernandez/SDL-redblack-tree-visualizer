@@ -3,6 +3,7 @@
    Dakota Hernandez
    Sofia Amador
    Anjan Godavarti
+   Xiangyu Wu
 * Assignment Title: CSI 3334 Group Project
 * Assignment Description: Using SDL, create a red-black tree visualizer using SDL
 * Due Date: 12/10/2024
