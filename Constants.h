@@ -33,7 +33,10 @@ const color BLACK                      (0,0,0);
 const color LINE_COLOR                 (150, 150, 150);
 
 //stuff for nodes
-
 const int NODE_RADIUS = 15;
 const int VERTICAL_GAP = 50;
+
+//stuff for red black tree displayer
+const int TOP_MARGIN = WINDOW_HEIGHT / 10;
+
 #endif /* Constants_h */
