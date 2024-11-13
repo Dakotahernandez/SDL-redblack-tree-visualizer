@@ -10,7 +10,6 @@
 * Date Created: 10/09/2024
 * Date Last Modified: 10/16/2024
 */
-#ifnde
 
 // Custom libraries
 #include "SDL_Plotter.h"
