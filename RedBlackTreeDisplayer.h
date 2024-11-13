@@ -28,9 +28,9 @@ public:
         : plotter(plotter), width(width), height(height) {}
 
     // Main function to display the Red-Black Tree
-    void displayTree(Red_Black_Tree<T>& tree) {
+    void displayTree(Red_Black_Tree<int>& tree) {
         plotter.clear();
-        displayNode(tree.getRoot(), width / 2, NODE_RADIUS * 2, width / 4, NODE_RADIUS);
+        displayNode(tree.getRoot(), WINDOW_WIDTH / 2, TOP_MARGIN + NODE_RADIUS, WINDOW_WIDTH / 4, NODE_RADIUS);
         plotter.update();
     }
 
@@ -100,7 +100,7 @@ private:
     }
 
     // Recursively displays each node in the tree
-    void displayNode(Node<T>* node, int x, int y, int horizontal_gap, int radius) {
+   void displayNode(Node<T>* node, int x, int y, int horizontal_gap, int radius) {
         if (node == nullptr) return;
 
         // Determine color based on node color
