@@ -44,7 +44,7 @@ int main(int argc, char** argv) {
         cout << "Press I to insert and R to remove: ";
         cin >> RorI;
         cout << RorI << endl;
-        cout << "Please enter the integer(within 4 digits) you would like to ";
+        cout << "Please enter the positive integer(within 4 digits) you would like to ";
         if(RorI == 'I' || RorI == 'R'){
             if(RorI == 'I'){
                 cout << "insert :";
@@ -54,8 +54,8 @@ int main(int argc, char** argv) {
             }
             cin >> input;
             cout << input << endl;
-            while(input > 9999){
-                cout <<"Error: please enter the integer within 4 digits" << endl;
+            while(input > 9999 || input < 0){
+                cout <<"Error: please enter the positive integer within 4 digits" << endl;
                 cout <<"New integer: ";
                 cin >> input;
                 cout << input << endl;
