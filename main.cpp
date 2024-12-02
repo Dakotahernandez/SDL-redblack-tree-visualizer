@@ -32,14 +32,6 @@ int main(int argc, char** argv) {
 
     while (!plotter.getQuit()) {
         displayer.displayTree(tree); // Display the Red-Black Tree
-        /*
-         instead of this kidn of input a good option is
-         display 2 squares on sdl one says insert one says remove
-         have a while loop that waits til theres a mouse click in either box
-         then recieves input and does command.<-- this will more likley get us a
-         better grade
-         or a kbhit function with i for insert and r for remove
-         */
 
         cout << "Press I to insert and R to remove: ";
         cin >> RorI;
