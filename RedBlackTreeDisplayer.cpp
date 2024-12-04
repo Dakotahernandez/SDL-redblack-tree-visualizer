@@ -1,4 +1,14 @@
-//cpp file
+/*
+* Authors:
+   Dakota Hernandez
+   Sofia Amador
+   Xiangyu Wu
+* Assignment Title: CSI 3334 Group Project
+* Assignment Description: Using SDL, create a red-black tree visualizer using SDL
+* Due Date: 12/10/2024
+* Date Created: 10/09/2024
+* Date Last Modified: 12/04/2024
+*/
 #include "RedBlackTreeDisplayer.h"
 template <typename T>
 void RedBlackTreeDisplayer<T>::drawLetter(int x, int y, char letter, int scale, color c){
