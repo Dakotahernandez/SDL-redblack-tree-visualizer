@@ -37,8 +37,9 @@ private:
     SDL_Plotter& plotter;
     int width, height;
 
+    //Basic functions to draw circle and line and square/rectangle
     // Draws a circle for a node
-    void drawCircle(int x, int y, int radius, color c, int value) {
+    void drawCircle(int x, int y, int radius, color c) {
         for (int w = 0; w < radius * 2; w++) {
             for (int h = 0; h < radius * 2; h++) {
                 int dx = radius - w;
@@ -48,404 +49,154 @@ private:
                 }
             }
         }
-        drawNumber(x, y, value);
     }
-    //Xiangyu added drawNumber in 11/20/2024
-    //assume number is no more than 4 digits
-    void drawNumber(int x, int y, int value) {
-        color c = GREEN; // green digits are so cool!
-        //int pixelLength = 7;
-        string numberString = to_string(value);
-        //add leading zeros if input values are less than 4 digits
-        if (numberString.length() == 1) {
-            numberString = "000" + numberString;
-        }
-        else if (numberString.length() == 2) {
-            numberString = "00" + numberString;
-        }
-        else if (numberString.length() == 3) {
-            numberString = "0" + numberString;
-        }
-        //write numbers
-        for(int i = 0; i < 4; i++) { // for 4 digits
-            char digit = numberString[i];
-            int digitPosition = 0; //digitPosition
-            
-            //Look me: Since digit wedth is 5 pixels, choosing 7 pixels as the distance between two digits
-            //allows for 2 pixels of space between them.
-            //for x location. Plus, digit height is 9 pixels
-            if(i == 0) {
-                digitPosition = - 11 ;// location x - 11 for 0th digit
-            }
-            else if(i == 1) {
-                digitPosition = - 4;// location x - 4 for 1th digit
-            }
-            else if(i == 2) {
-                digitPosition = 3; // location x + 3 for 2nd digit
-            }
-            else if(i == 3) {
-                digitPosition = 10;// location + 10 for 3rd digit
-            }
-            
-            
-            //Here is to visualize each digit
-            if(digit == '0') {
-                /* -III-
-                 I   I
-                 I   I
-                 I   I
-                 I x I //x is initial plot
-                 I   I
-                 I   I
-                 I   I
-                 -III-
-                 
-                 */
-                plotter.plotPixel(x + digitPosition, y-4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 1, y-4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 1, y-4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 2, y-3, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 2, y-3, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 2, y-2, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 2, y-2, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 2, y-1, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 2, y-1, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 2, y, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 2, y, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 2, y+1, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 2, y+1, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 2, y+2, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 2, y+2, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 2, y+3, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 2, y+3, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition, y+4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 1, y+4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 1, y+4, c.R, c.G, c.B);
-            }
-            else if(digit == '1') {
-                /*
-                 --I--   y-4
-                 -II--   y-3
-                 I-I--   y-2
-                 --I--   y-1
-                 --x--   y
-                 --I--   y+1
-                 --I--   y+2
-                 --I--   y+3
-                 IIIII   y+4
-                 */
-                plotter.plotPixel(x + digitPosition, y-4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition, y-3, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 1, y-3, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 2, y-2, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition, y-2, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition, y-1, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition, y, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition, y+1, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition, y+2, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition, y+3, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition, y+4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 1, y+4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 1, y+4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 2, y+4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 2, y+4, c.R, c.G, c.B);
-            }
-            else if(digit == '2') {
-                /*
-                 -III-   y-4
-                 I---I   y-3
-                 ----I   y-2
-                 ----I   y-1
-                 --xI-   y
-                 --I--   y+1
-                 -I---   y+2
-                 I----   y+3
-                 IIIII   y+4
-                 */
-                plotter.plotPixel(x + digitPosition, y-4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 1, y-4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 1, y-4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 2, y-3, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 2, y-3, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 2, y-2, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 2, y-1, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 1, y, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition, y+1, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 1, y+2, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 2, y+3, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 2, y+4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 2, y+4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 1, y+4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 1, y+4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition, y+4, c.R, c.G, c.B);
-                
-            }
-            else if(digit == '3'){
-                /*
-                 -III-   y-4
-                 I---I   y-3
-                 ----I   y-2
-                 ----I   y-1
-                 -IxI-   y
-                 ----I   y+1
-                 ----I   y+2
-                 I---I   y+3
-                 -III-   y+4
-                 */
-                plotter.plotPixel(x + digitPosition, y-4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 1, y-4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 1, y-4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 2, y-3, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 2, y-3, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 2, y-2, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 2, y-1, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 1, y, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition, y, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 1, y, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition, y+4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 1, y+4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 1, y+4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 2, y+3, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 2, y+3, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 2, y+2, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 2, y+1, c.R, c.G, c.B);
-                
-            }
-            else if(digit == '4'){
-                /*
-                 ---I-  y-4
-                 --II-  y-3
-                 -I-I-  y-2
-                 I--I-  y-1
-                 IIxII  y
-                 ---I-  y+1
-                 ---I-  y+2
-                 ---I-  y+3
-                 ---I-  y+4
-                 */
-                plotter.plotPixel(x + digitPosition + 1, y-4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 1, y-3, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition, y-3, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 1, y-2, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 1, y-2, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 2, y-1, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 1, y-1, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition, y, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 1, y, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 1, y, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 2, y, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 2, y, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 1, y+1, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 1, y+2, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 1, y+3, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 1, y+4, c.R, c.G, c.B);
-            }
-            else if(digit == '5'){
-                /*
-                 IIIII  y-4
-                 I----  y-3
-                 I----  y-2
-                 IIII-  y-1
-                 --x-I  y
-                 ----I  y+1
-                 ----I  y+2
-                 I---I  y+3
-                 -III-  y+4
-                 */
-                plotter.plotPixel(x + digitPosition + 2, y-4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 2, y-4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 1, y-4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 1, y-4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition, y-4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 2, y-3, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 2, y-2, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 2, y-1, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 1, y-1, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition, y-1, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 1, y-1, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 2, y, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 2, y+1, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 2, y+2, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 2, y+3, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 2, y+3, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition, y+4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 1, y+4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 1, y+4, c.R, c.G, c.B);
-            }
-            else if(digit == '6'){
-                /*
-                 -III-  y-4
-                 I----  y-3
-                 I----  y-2
-                 I----  y-1
-                 IIxI-  y
-                 I---I  y+1
-                 I---I  y+2
-                 I---I  y+3
-                 -III-  y+4
-                 */
-                plotter.plotPixel(x + digitPosition + 1, y-4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 1, y-4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition, y-4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 2, y-3, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 2, y-2, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 2, y-1, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 2, y, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 1, y, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition, y, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 1, y, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 2, y+1, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 2, y+1, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 2, y+2, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 2, y+2, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 2, y+3, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 2, y+3, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 1, y+4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 1, y+4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition, y+4, c.R, c.G, c.B);
-            }
-            else if(digit == '7'){
-                /*
-                 IIIII  y-4
-                 ----I  y-3
-                 ----I  y-2
-                 ---I-  y-1
-                 --x--  y
-                 --I--  y+1
-                 --I--  y+2
-                 --I--  y+3
-                 --I--  y+4
-                 */
-                plotter.plotPixel(x + digitPosition + 2, y-4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 2, y-4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 1, y-4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 1, y-4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition, y-4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 2, y-3, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 2, y-2, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 1, y-1, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition, y, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition, y+1, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition, y+2, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition, y+3, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition, y+4, c.R, c.G, c.B);
-            }
-            else if(digit == '8'){
-                /*
-                 -III-  y-4
-                 I---I  y-3
-                 I---I  y-2
-                 I---I  y-1
-                 -IxI-  y
-                 I---I  y+1
-                 I---I  y+2
-                 I---I  y+3
-                 -III-  y+4
-                 */
-                plotter.plotPixel(x + digitPosition + 1, y-4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 1, y-4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition, y-4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 2, y-3, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 2, y-3, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 2, y-2, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 2, y-2, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 2, y-1, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 2, y-1, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 1, y, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 1, y, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition, y, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 2, y+3, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 2, y+3, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 2, y+2, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 2, y+2, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 2, y+1, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 2, y+1, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 1, y+4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 1, y+4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition, y+4, c.R, c.G, c.B);
-            }
-            else if(digit == '9'){ //Last brance is still else-if brance to avoid unexpected input in case
-                /*
-                 -III-  y-4
-                 I---I  y-3
-                 I---I  y-2
-                 I---I  y-1
-                 -IxI-  y
-                 ----I  y+1
-                 ----I  y+2
-                 ----I  y+3
-                 -III-  y+4
-                 */
-                plotter.plotPixel(x + digitPosition + 1, y-4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 1, y-4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition, y-4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 2, y-3, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 2, y-3, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 2, y-2, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 2, y-2, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 2, y-1, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 2, y-1, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 1, y, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 1, y, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition, y, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 2, y+3, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 2, y+2, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 2, y+1, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition + 1, y+4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition - 1, y+4, c.R, c.G, c.B);
-                plotter.plotPixel(x + digitPosition, y+4, c.R, c.G, c.B);
-            }
-            
-        }
-    }
-//SOFIA ANIMATION CIRCLE
-    /*
-#include <ctime>
-    void drawXXCircle(int x, int y, int radius, color c) {
-        const int maxRadiusIncrease = 10; // Maximum amount circle grows
-        const double speed = 2.0;
-        static clock_t startTime = clock();
-        double elapsedTime = (double)(clock() - startTime) / CLOCKS_PER_SEC;
-        int dynamicRadius = radius + maxRadiusIncrease * fabs(sin(elapsedTime * speed));
-        
-            
-            for (int w = 0; w < dynamicRadius * 2; w++) {
-                for (int h = 0; h < dynamicRadius * 2; h++) {
-                    int dx = dynamicRadius - w;
-                    int dy = dynamicRadius - h;
-                    if ((dx * dx + dy * dy) <= (dynamicRadius * dynamicRadius)) {
-                        plotter.plotPixel(x + dx, y + dy, c.R, c.G, c.B);
-                    }
-                }
-            }
-            
-        
-        
-    }
-    */
+   
     // Draws a line between two points (for edges between nodes)
+   //changed to do-while got rid of break/true method
     void drawLine(int x1, int y1, int x2, int y2, color c) {
-        int dx = abs(x2 - x1);
-        int dy = abs(y2 - y1);
-        int sx = (x1 < x2) ? 1 : -1;
-        int sy = (y1 < y2) ? 1 : -1;
-        int err = dx - dy;
-
-        while (true) {
+        int dx = abs(x2 - x1);          //horizontal distance
+        int dy = abs(y2 - y1);          //vertical distance
+        int sx = (x1 < x2) ? 1 : -1;    //-1 move left, 1 move right
+        int sy = (y1 < y2) ? 1 : -1;    //-1 move up, 1 move down
+        int err = dx - dy;              //determines whether to move horizontally/vertically
+        do{
             plotter.plotPixel(x1, y1, c.R, c.G, c.B);
-
-            if (x1 == x2 && y1 == y2) break;
-            int e2 = err * 2;
-            if (e2 > -dy) {
+            int e2 = err * 2;               //error adjustment/movement
+            if (e2 > -dy) {              
                 err -= dy;
                 x1 += sx;
             }
-            if (e2 < dx) {
+            if (e2 < dx) {          
                 err += dx;
                 y1 += sy;
             }
+        }while(x1 != x2 && y1 != y2);
+    }
+   void drawRectangle(int x, int y, int width, int height, color c){
+        for(int i = 0; i < width; i++){
+            for(int j = 0; j < height; j++) {
+                plotter.plotPixel(x + i, y + j, c.R, c.G, c.B);
+            }
         }
     }
+
+    //Xiangyu added drawNumber in 11/20/2024
+    //^^^Moved your drawNumber functions to the cpp file
+    //moved to a cpp file because they got really long
+    //bit weird with templated class, can move back if doesnt work
+    //added template to bottom of cpp file so it runs, otherwise it wont
+    void cubeIt(int x, int y, color c){
+        int scale = 2;  //can change this for thickness
+        //color c = GREEN;
+        for(int i = 0; i < scale; i++){
+            for(int j = 0; j < scale; j++){
+                plotter.plotPixel(x + i, y + j, c.R, c.G, c.B);
+            }
+        }
+    }
+    void drawLetter(int x, int y, char letter, int scale, color c);
+    void drawNumber(int x, int y, int value);
+
+   //feel free to move the buttons around to a diff location/change color/size
+   void removeButton(){
+        int x = 100;
+        int y = 650;
+        drawRectangle(x-28, y-30, 120, 60, CUTE_PINK);
+        drawLetter(x    , y, 'R', 2, DARK_PINK);
+        drawLetter(x +12, y, 'e', 2, DARK_PINK);
+        drawLetter(x +25, y, 'm', 2, DARK_PINK);
+        drawLetter(x +37, y, 'o', 2, DARK_PINK);
+        drawLetter(x +49, y, 'v', 2, DARK_PINK);
+        drawLetter(x +61, y, 'e', 2, DARK_PINK);
+    }
+    void inputButton(){
+        int x = 300;
+        int y = 650;
+        drawRectangle(x-28, y-30, 120, 60, CUTE_PINK);
+        drawLetter(x    , y, 'I', 2, DARK_PINK);
+        drawLetter(x +13, y, 'n', 2, DARK_PINK);
+        drawLetter(x +26, y, 's', 2, DARK_PINK);
+        drawLetter(x +38, y, 'e', 2, DARK_PINK);
+        drawLetter(x +50, y, 'r', 2, DARK_PINK);
+        drawLetter(x +60, y, 't', 2, DARK_PINK);
+    }
+   //wanted to move title in top middle but need to move whole tree down
+    void titleName(){
+        int x = 150;
+        int y = 580;
+        drawLetter(x    , y, 'R', 2, RED);
+        drawLetter(x +12, y, 'e', 2, RED);
+        drawLetter(x +24, y, 'd', 2, RED);
+        drawLetter(x +37, y, '-', 2, N_GRAY);
+        drawLetter(x +50, y, 'B', 2, BLACK);
+        drawLetter(x +60, y, 'l', 2, BLACK);
+        drawLetter(x +69, y, 'a', 2, BLACK);
+        drawLetter(x +81, y, 'c', 2, BLACK);
+        drawLetter(x +93, y, 'k', 2, BLACK);
+        drawLetter(x+120, y, 'T', 2, N_GRAY);
+        drawLetter(x+131, y, 'r', 2, N_GRAY);
+        drawLetter(x+143, y, 'e', 2, N_GRAY);
+        drawLetter(x+155, y, 'e', 2, N_GRAY);
+    }
+   void drawNodeCircle(int x, int y, int radius, color OutC, color InC, int value) {
+        drawCircle(x, y, radius + 2, OutC);     //outline
+        drawCircle(x, y, radius, InC);          //inside
+        drawNumber(x, y, value);
+    }
+   void displayNewNode(const color nodeColor, int value){
+        /*this is a green node in the top left that is created when a new node
+         is created. during comparisons it should do the blue outline animation.
+         it should be change color to black/red then glide to its new spot
+         leaving the space blank/white*/
+        int startX = 50;
+        int startY = 50;
+        drawNodeCircle(startX, startY, NODE_RADIUS, N_GROU, nodeColor, value);
+    }
+   void pulsateOutlineSofia(int x, int y, color OC, color IC, int value) {
+        //NODE_RADIUS == 20
+        for(int i = 0; i < 2; i++){     //two cycles
+            for(int i = 0; i < 10; i++){    //grows
+                plotter.update();
+                plotter.Sleep(20);
+                drawCircle(x, y, NODE_RADIUS + i, PO_BLUE);  //outline
+                drawNodeCircle(x, y, NODE_RADIUS, OC, IC, value);
+            }
+            for(int i = 10; i > 0; i--){    //shrinks
+                plotter.update();
+                plotter.Sleep(20);
+                drawCircle(x, y, NODE_RADIUS + i, _WHITE);  //outline
+                drawNodeCircle(x, y, NODE_RADIUS, OC, IC, value); //node over
+            }
+        }
+    }
+   void drawSlowLine(int x1, int y1, int x2, int y2, color c) {
+        int dx = abs(x2 - x1);          //horizontal distance
+        int dy = abs(y2 - y1);          //vertical distance
+        int sx = (x1 < x2) ? 1 : -1;    //-1 move left, 1 move right
+        int sy = (y1 < y2) ? 1 : -1;    //-1 move up, 1 move down
+        int err = dx - dy;              //determines whether to move horizontally/vertically
+        do{
+            plotter.plotPixel(x1, y1, c.R, c.G, c.B);
+            plotter.update();
+            plotter.Sleep(1);
+            int e2 = err * 2;               //error adjustment/movement
+            if (e2 > -dy) {                 //horizontal direction
+                err -= dy;
+                x1 += sx;
+            }
+            if (e2 < dx) {                  //vertical direction
+                err += dx;
+                y1 += sy;
+            }
+        }while(x1 != x2 && y1 != y2);
+    }
+
+
+
+   //will update more stuff in a bit need to clean it up but its functional
+
+
+
 
     // Recursively displays each node in the tree
    void displayNode(Node<T>* node, int x, int y, int horizontal_gap, int radius) {
