@@ -37,8 +37,13 @@ private:
     SDL_Plotter& plotter;
     int width, height;
 
-    //Basic functions to draw circle and line and square/rectangle
-    // Draws a circle for a node
+    //3 Main Basic Drawing Functions: Circle, Line, Rectangle
+    /*
+     * description: draw circle with given radius at specific coordinate
+     * return: none
+     * precondition: xy coordinates valid for window dimensions
+     * postcondition: filled circle is displayed at desired location
+     */
     void drawCircle(int x, int y, int radius, color c) {
         for (int w = 0; w < radius * 2; w++) {
             for (int h = 0; h < radius * 2; h++) {
@@ -51,17 +56,21 @@ private:
         }
     }
    
-    // Draws a line between two points (for edges between nodes)
-   //changed to do-while got rid of break/true method
+    /*
+     * description: draw line between two points
+     * return: none
+     * precondition: xy coordinates valid for window dimensions
+     * postcondition: line is drawn at desired location
+     */
     void drawLine(int x1, int y1, int x2, int y2, color c) {
-        int dx = abs(x2 - x1);          //horizontal distance
-        int dy = abs(y2 - y1);          //vertical distance
-        int sx = (x1 < x2) ? 1 : -1;    //-1 move left, 1 move right
-        int sy = (y1 < y2) ? 1 : -1;    //-1 move up, 1 move down
-        int err = dx - dy;              //determines whether to move horizontally/vertically
+        int dx = abs(x2 - x1);         //horizontal distance
+        int dy = abs(y2 - y1);         //vertical distance
+        int sx = (x1 < x2) ? 1 : -1;   //-1 move left, 1 move right
+        int sy = (y1 < y2) ? 1 : -1;   //-1 move up, 1 move down
+        int err = dx - dy;             //determines whether to move horizontally/vertically
         do{
             plotter.plotPixel(x1, y1, c.R, c.G, c.B);
-            int e2 = err * 2;               //error adjustment/movement
+            int e2 = err * 2;          //error adjustment/movement
             if (e2 > -dy) {              
                 err -= dy;
                 x1 += sx;
@@ -72,6 +81,12 @@ private:
             }
         }while(x1 != x2 && y1 != y2);
     }
+   /*
+     * description: draw rectangle with given width and height
+     * return: none
+     * precondition: xy coordinates valid for window dimensions
+     * postcondition: filled rectangle is displayed at desired location
+     */
    void drawRectangle(int x, int y, int width, int height, color c){
         for(int i = 0; i < width; i++){
             for(int j = 0; j < height; j++) {
@@ -85,19 +100,43 @@ private:
     //moved to a cpp file because they got really long
     //bit weird with templated class, can move back if doesnt work
     //added template to bottom of cpp file so it runs, otherwise it wont
+
+   /*
+     * description: increases pixel size from 1 pixel = 4 pixels
+     * return: none
+     * precondition: xy coordinates are scaled seperately if needed
+     * postcondition: pixels are drawn at desired location
+     */
     void cubeIt(int x, int y, color c){
         int scale = 2;  //can change this for thickness
-        //color c = GREEN;
         for(int i = 0; i < scale; i++){
             for(int j = 0; j < scale; j++){
                 plotter.plotPixel(x + i, y + j, c.R, c.G, c.B);
             }
         }
     }
+   /*
+     * description: draws letter
+     * return: none
+     * precondition: letter is included in the selected group in func
+     * postcondition: letter is drawn at desired location
+     */
     void drawLetter(int x, int y, char letter, int scale, color c);
+   /*
+     * description: draws number
+     * return: none
+     * precondition: number is 4 digits or less
+     * postcondition: number is drawn at desired location
+     */
     void drawNumber(int x, int y, int value);
 
    //feel free to move the buttons around to a diff location/change color/size
+   /*
+     * description: draws the labeled remove button
+     * return: none
+     * precondition: means of drawing letters, scale is 2
+     * postcondition: button is drawn at desired location
+     */
    void removeButton(){
         int x = 100;
         int y = 650;
@@ -109,6 +148,13 @@ private:
         drawLetter(x +49, y, 'v', 2, DARK_PINK);
         drawLetter(x +61, y, 'e', 2, DARK_PINK);
     }
+
+   /*
+     * description: draws the labeled insert button
+     * return: none
+     * precondition: means of drawing letters, scale is 2
+     * postcondition: button is drawn at desired location
+     */
     void inputButton(){
         int x = 300;
         int y = 650;
@@ -120,7 +166,14 @@ private:
         drawLetter(x +50, y, 'r', 2, DARK_PINK);
         drawLetter(x +60, y, 't', 2, DARK_PINK);
     }
+
    //wanted to move title in top middle but need to move whole tree down
+   /*
+     * description: draws the title "Red-Black Tree"
+     * return: none
+     * precondition: means of drawing letters, scale is 2
+     * postcondition: phrase is drawn at desired location
+     */
     void titleName(){
         int x = 150;
         int y = 580;
@@ -138,11 +191,25 @@ private:
         drawLetter(x+143, y, 'e', 2, N_GRAY);
         drawLetter(x+155, y, 'e', 2, N_GRAY);
     }
+
+   /*
+     * description: draws a filled node circle with outline and num value
+     * return: none
+     * precondition: valid xy coordinates, value digits 4 or less
+     * postcondition: node is drawn at desired location
+     */
    void drawNodeCircle(int x, int y, int radius, color OutC, color InC, int value) {
         drawCircle(x, y, radius + 2, OutC);     //outline
         drawCircle(x, y, radius, InC);          //inside
         drawNumber(x, y, value);
     }
+
+   /*
+     * description: draws new node with value in top left corner before sort
+     * return: none
+     * precondition: value digits 4 or less
+     * postcondition: node is drawn at inital location before placement
+     */
    void displayNewNode(const color nodeColor, int value){
         /*this is a green node in the top left that is created when a new node
          is created. during comparisons it should do the blue outline animation.
@@ -152,16 +219,33 @@ private:
         int startY = 50;
         drawNodeCircle(startX, startY, NODE_RADIUS, N_GROU, nodeColor, value);
     }
-   void pulsateOutlineSofia(int x, int y, color OC, color IC, int value) {
+
+   /*
+     * description: deletes a circle by drawing white
+     * return: none
+     * precondition: valid xy coordinates
+     * postcondition: previous circle should be completely gone
+     */
+    void clearCircle(int x, int y, int radius) {
+        drawCircle(x, y, radius, _WHITE);
+    }
+
+   /*
+     * description: indicates which node is being currently viewed
+     * return: none
+     * precondition: valid xy coordinates
+     * postcondition: blue outline animation around node 2 times
+     */
+   void pulsateOutline(int x, int y, color OC, color IC, int value) {
         //NODE_RADIUS == 20
-        for(int i = 0; i < 2; i++){     //two cycles
-            for(int i = 0; i < 10; i++){    //grows
+        for(int i = 0; i < 2; i++){                         //two cycles
+            for(int i = 0; i < 10; i++){                    //grows
                 plotter.update();
                 plotter.Sleep(20);
-                drawCircle(x, y, NODE_RADIUS + i, PO_BLUE);  //outline
+                drawCircle(x, y, NODE_RADIUS + i, PO_BLUE); //outline
                 drawNodeCircle(x, y, NODE_RADIUS, OC, IC, value);
             }
-            for(int i = 10; i > 0; i--){    //shrinks
+            for(int i = 10; i > 0; i--){                    //shrinks
                 plotter.update();
                 plotter.Sleep(20);
                 drawCircle(x, y, NODE_RADIUS + i, _WHITE);  //outline
@@ -169,6 +253,13 @@ private:
             }
         }
     }
+
+   /*
+     * description: draws line with slow animation for arrows
+     * return: none
+     * precondition: valid xy coordinates
+     * postcondition: line is incrementally drawn from one point to next
+     */
    void drawSlowLine(int x1, int y1, int x2, int y2, color c) {
         int dx = abs(x2 - x1);          //horizontal distance
         int dy = abs(y2 - y1);          //vertical distance
@@ -179,23 +270,35 @@ private:
             plotter.plotPixel(x1, y1, c.R, c.G, c.B);
             plotter.update();
             plotter.Sleep(1);
-            int e2 = err * 2;               //error adjustment/movement
-            if (e2 > -dy) {                 //horizontal direction
+            int e2 = err * 2;            //error adjustment/movement
+            if (e2 > -dy) {              //horizontal direction
                 err -= dy;
                 x1 += sx;
             }
-            if (e2 < dx) {                  //vertical direction
+            if (e2 < dx) {               //vertical direction
                 err += dx;
                 y1 += sy;
             }
         }while(x1 != x2 && y1 != y2);
     }
    
-    //helper function for drawing filled triangle
+    /*
+     * description: helper function to draw filled triangle using
+     * a line between two points and a given y-coordinate
+     * return: interpolated x-coordinate
+     * precondition: valid xy coordinates, y1-y0 != 0
+     * postcondition: previous circle should be completely gone
+     */
     int interpolateX(int x0, int y0, int x1, int y1, int y){
         if (y1 == y0) return x0;
         return x0 + ((x1 - x0) * (y - y0)) / (y1 - y0);
     }
+   /*
+     * description: draws a filled triangle for arrowheads
+     * return: none
+     * precondition: three valid points xy coordinates of triangle
+     * postcondition: triangle is drawn pointing in specific direction
+     */
     void drawFilledTriangle(int x1, int y1, int x2, int y2, int x3, int y3, color c){
         if(y1 > y2){
             swap(x1, x2);
@@ -230,7 +333,12 @@ private:
         }
     }
     
-    //this function calculates the 3 coordinates of the triangle for arrow
+    /*
+     * description: calculates 3 coordinates of triangle for arrow
+     * return: none
+     * precondition: two valid points xy coordinates of a line
+     * postcondition: triangle is drawn at end of a line
+     */
     void drawArrowhead(int x1, int y1, int x2, int y2, int r, color c) {
         int dx = x2 - x1;       //direction
         int dy = y2 - y1;
@@ -260,7 +368,13 @@ private:
         //this actually draws it using the three points
         drawFilledTriangle(Px1, Py1, Px2, Py2, Px3, Py3, c);
     }
-    
+
+   /*
+     * description: draws an animated arrow
+     * return: none
+     * precondition: valid points xy coordinates
+     * postcondition: arrow is drawn pointing in specific direction
+     */
     void drawArrow(int x1, int y1, int x2, int y2, color c){
         drawSlowLine(x1, y1, x2, y2, c);
         drawArrowhead(x1, y1, x2, y2, 17, c);
@@ -290,10 +404,10 @@ private:
       //new node in top left corner
       displayNewNode(N_GREEN, node->value);
       //blue line for green new node
-        pulsateOutlineSofia(50, 50, N_GROU, N_GREEN, node->value);
+        pulsateOutline(50, 50, N_GROU, N_GREEN, node->value);
         
         //blue outline for node in tree
-        pulsateOutlineSofia(x, y, nodeOutline, nodeColor, node->value);
+        pulsateOutline(x, y, nodeOutline, nodeColor, node->value);
 
       
         // Draw and display the left child
