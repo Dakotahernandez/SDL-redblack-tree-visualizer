@@ -190,16 +190,89 @@ private:
             }
         }while(x1 != x2 && y1 != y2);
     }
+   
+    //helper function for drawing filled triangle
+    int interpolateX(int x0, int y0, int x1, int y1, int y){
+        if (y1 == y0) return x0;
+        return x0 + ((x1 - x0) * (y - y0)) / (y1 - y0);
+    }
+    void drawFilledTriangle(int x1, int y1, int x2, int y2, int x3, int y3, color c){
+        if(y1 > y2){
+            swap(x1, x2);
+            swap(y1, y2);
+        }
+        if(y1 > y3){
+            swap(x1, x3);
+            swap(y1, y3);
+        }
+        if(y2 > y3){
+            swap(x2, x3);
+            swap(y2, y3);
+        }
 
+        //draws lines between edges of the triangle
+        for (int y = y1; y <= y3; y++){
+            int xStart, xEnd;
+            if(y <= y2){
+                xStart = interpolateX(x1, y1, x2, y2, y);
+                xEnd = interpolateX(x1, y1, x3, y3, y);
+            }else{
+                xStart = interpolateX(x2, y2, x3, y3, y);
+                xEnd = interpolateX(x1, y1, x3, y3, y);
+            }
+            if(xStart > xEnd){
+                swap(xStart, xEnd);
+            }
 
-
-   //will update more stuff in a bit need to clean it up but its functional
-
-
+            for(int x = xStart; x <= xEnd; x++){
+                plotter.plotPixel(x, y, c.R, c.G, c.B);
+            }
+        }
+    }
+    
+    //this function calculates the 3 coordinates of the triangle for arrow
+    void drawArrowhead(int x1, int y1, int x2, int y2, int r, color c) {
+        int dx = x2 - x1;       //direction
+        int dy = y2 - y1;
+        double length = sqrt(dx * dx + dy * dy);
+        if (length == 0) return;
+        double ux = dx / length;
+        double uy = dy / length;
+        double width = r / sqrt(3.0);
+        //added this to move the arrows so theyre not hidden by node circles
+        x2 = x2 - static_cast<int>(r * ux);
+        y2 = y2 - static_cast<int>(r * uy);
+        
+        //perpendicular rotate 90 degrees clockwise
+        double vx = -uy;
+        double vy = ux;
+        
+        //P1
+        int Px1 = x2;
+        int Py1 = y2;
+        //P2
+        int Px2 = x2 - static_cast<int>(r * ux) + static_cast<int>(width * vx);
+        int Py2 = y2 - static_cast<int>(r * uy) + static_cast<int>(width * vy);
+        //P3
+        int Px3 = x2 - static_cast<int>(r * ux) - static_cast<int>(width * vx);
+        int Py3 = y2 - static_cast<int>(r * uy) - static_cast<int>(width * vy);
+        
+        //this actually draws it using the three points
+        drawFilledTriangle(Px1, Py1, Px2, Py2, Px3, Py3, c);
+    }
+    
+    void drawArrow(int x1, int y1, int x2, int y2, color c){
+        drawSlowLine(x1, y1, x2, y2, c);
+        drawArrowhead(x1, y1, x2, y2, 17, c);
+    }
+    
 
 
     // Recursively displays each node in the tree
    void displayNode(Node<T>* node, int x, int y, int horizontal_gap, int radius) {
+        titleName();
+        removeButton();
+        inputButton();
         if (node == nullptr) return;
 
         // Determine color based on node color
@@ -211,13 +284,23 @@ private:
         }
 
         // Draw the current node
-        drawCircle(x, y, radius, nodeColor, node->value);
+        drawNodeCircle(x, y, radius, nodeOutline, nodeColor, node->value);
 
+      //new stuffz
+      //new node in top left corner
+      displayNewNode(N_GREEN, node->value);
+      //blue line for green new node
+        pulsateOutlineSofia(50, 50, N_GROU, N_GREEN, node->value);
+        
+        //blue outline for node in tree
+        pulsateOutlineSofia(x, y, nodeOutline, nodeColor, node->value);
+
+      
         // Draw and display the left child
         if (node->left != nullptr) {
             int childX = x - horizontal_gap;
             int childY = y + VERTICAL_GAP;
-            drawLine(x, y, childX, childY, LINE_COLOR);
+            drawArrow(x, y, childX, childY, LINE_COLOR);
             displayNode(node->left, childX, childY, horizontal_gap / 2, radius);//Change in 11/20/2024: previous 0.8 *radius let each next node
         }                                                                       //circle shrinks by 0.8.
 
@@ -225,7 +308,7 @@ private:
         if (node->right != nullptr) {
             int childX = x + horizontal_gap;
             int childY = y + VERTICAL_GAP;
-            drawLine(x, y, childX, childY, LINE_COLOR);
+            drawArrow(x, y, childX, childY, LINE_COLOR);
             displayNode(node->right, childX, childY, horizontal_gap / 2, radius);//ditto
         }
     }
