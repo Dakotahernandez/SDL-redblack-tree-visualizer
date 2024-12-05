@@ -1,0 +1,15 @@
+Performance Analysis (15%): Thorough analysis of performance under different scenarios.
+Provide a detailed report that includes:
+Explanation of how the Red-Black Tree works.
+Design decisions in implementing the tree and visualization.
+Description of the interface and how it supports user interaction.
+Performance analysis with the chosen datasets.
+Reflections on the challenges encountered and how they were resolved.
+Test your Red-Black Tree with at least three datasets:
+Randomly generated integers.
+A dataset of increasing order.
+A dataset of decreasing order.
+Analyze the performance in terms of:
+Height of the tree.
+Average and worst-case time complexity for insertions and deletions.
+Number of rotations and re-colorings.
