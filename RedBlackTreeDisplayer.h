@@ -230,6 +230,31 @@ private:
         drawCircle(x, y, radius, _WHITE);
     }
 
+
+   //basic function to move circle from one place to next
+   //NEED TO FIX: erases everything behind it! :(
+   void glideNode(int x1, int y1, int x2, int y2, color c){
+        int dx = x2 - x1;         //horizontal distance
+        int dy = y2 - y1;         //vertical distance
+        int steps = max(dx, dy);
+        
+        int xRate = dx / steps;
+        int yRate = dy / steps;
+        int x = x1;
+        int y = y1;
+        for(int i = 0; i <= steps; i++){
+            drawCircle(x, y, NODE_RADIUS, c);
+            plotter.update();
+            if (i < steps) {
+                drawCircle(x, y, NODE_RADIUS, _WHITE);
+            }
+            x += xRate;
+            y += yRate;
+            plotter.Sleep(5);
+        }
+    }
+
+
    /*
      * description: indicates which node is being currently viewed
      * return: none
