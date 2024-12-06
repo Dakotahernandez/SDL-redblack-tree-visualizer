@@ -9,10 +9,10 @@
         bool xDirection = false;// both for checking movement direction;
         bool yDIrection = false;//
         if((newX - node->startX) >= 0){
-            xDirection = true; // true means to move right, flase moves right
+            xDirection = true; // true means to move right, false moves right
         }
         if((newY - node->startY) >= 0){
-            yDIrection = true;// true means to move down; flase means move up
+            yDIrection = true;// true means to move down; false means move up
         }                     // Because locations(x, y) all are within windows; it's impossible for difference which is out of
         // windows scope;
         int cycleCount = abs(newX - node->startX);//know the distance between initial and final location(x)
