@@ -54,13 +54,13 @@
             else{
                 node->startY = node->stratY + yMove *(yChange * (initialX - node->startX));
             }
-            //just imagine you made a coordinate axis by the initial x,y location; but y-axis is toward down by meaning increase; and x-axis is toward right by meaning increase
+            //just imagine you made a coordinate axis by the initial x,y location; but y-axis is toward down by meaning increase; and x-axis is toward right by meaning increase.
             /*
-             |
+                  |
              -----+---->
-             |
-             |
-             v
+                  |
+                  |
+                  v
              
              */
             drawCircle(lastx,lasty,20,_WHITE,node->value);//clear the last frame circle;
