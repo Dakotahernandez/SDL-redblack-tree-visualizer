@@ -24,7 +24,12 @@ struct Node {
     Node<T>* parent;        // Pointer to parent node
     char color;             // 'R' for Red, 'B' for Black
 
-    // Constructor with default arguments for left, right, parent, and color
+   /*
+      description: Constructor with default arguments for left, right, parent, and color
+      return: Constructor
+      precondition:None
+      postcondition:None
+*/
     Node(T value, Node<T>* left = nullptr, Node<T>* right = nullptr, Node<T>* parent = nullptr, char color = NODE_RED)
         : value(value), left(left), right(right), parent(parent), color(color) {}
 };
