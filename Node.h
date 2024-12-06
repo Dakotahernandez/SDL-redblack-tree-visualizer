@@ -13,11 +13,8 @@
 #define NODE_H
 
 #include <iostream>
+#include "constants.h"
 using namespace std;
-
-// Constants for node color
-constexpr char NODE_RED = 'R';
-constexpr char NODE_BLACK = 'B';
 
 template <typename T>
 struct Node {
