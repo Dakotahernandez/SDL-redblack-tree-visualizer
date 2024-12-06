@@ -18,6 +18,9 @@
 #ifndef Constants_h
 #define Constants_h
 
+//for nodes
+constexpr char NODE_RED = 'R';
+constexpr char NODE_BLACK = 'B';
 //size of screen displaying our redblack tree
 const int WINDOW_WIDTH = 1200;
 const int WINDOW_HEIGHT = 800;
