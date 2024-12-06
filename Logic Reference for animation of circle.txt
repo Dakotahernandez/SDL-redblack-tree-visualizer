@@ -9,7 +9,7 @@
         bool xDirection = false;// both for checking movement direction;
         bool yDIrection = false;//
         if((newX - node->startX) >= 0){
-            xDirection = true; // true means to move right, false moves right
+            xDirection = true; // true means to move right, false moves left
         }
         if((newY - node->startY) >= 0){
             yDIrection = true;// true means to move down; false means move up
