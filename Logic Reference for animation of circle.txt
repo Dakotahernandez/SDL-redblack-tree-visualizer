@@ -24,8 +24,8 @@
         }else{
             yChange = yDifference/cycleCount; //know slope to move in a straight line
         }
-        //Don't care about what is the new x,y,duing animation, are not all ints because it's hard to use eyes to see the difference aboyt that;
-        //as long as the final location is correct, the animation is correct;
+        //Don't care about what is the next x,y,duing animation, are not all ints because it's hard to use eyes to see the difference about that;
+        //as long as the final location is correct, the animation will be correct;
         
         int xMove, yMove;
         if(xDirection){
