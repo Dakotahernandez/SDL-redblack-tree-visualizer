@@ -1,0 +1,85 @@
+#include <chrono> //include these two file for sleep function;
+#include <thread> // this is just reference, hope it can help you:)
+
+
+//LOOK ME: Because here I assume the Node type have its own x and y variables, so the parameter here is used
+    // Node<T>* node; Or you could make a struct call nodeLocation used for movement and rotation;
+    void moveCircle(Node<T>* node, int newX, int newY, Node<T>* root) { //root use for refreshing
+        
+        bool xDirection = false;// both for checking movement direction;
+        bool yDIrection = false;//
+        if((newX - node->startX) >= 0){
+            xDirection = true; // true means to move right, flase moves right
+        }
+        if((newY - node->startY) >= 0){
+            yDIrection = true;// true means to move down; flase means move up
+        }                     // Because locations(x, y) all are within windows; it's impossible for difference which is out of
+        // windows scope;
+        int cycleCount = abs(newX - node->startX);//know the distance between initial and final location(x)
+        int yDifference = abs(newY - node->startY);//know the distance between initial and final location(y)
+        
+        double yChange;
+        if(cycleCount == 0){
+            yChange = 0;// just in case when yChange is 0, the code will crush
+        }else{
+            yChange = yDifference/cycleCount; //know slope to move in a straight line
+        }
+        //Don't care about what is the new x,y,duing animation, are not all ints because it's hard to use eyes to see the difference aboyt that;
+        //as long as the final location is correct, the animation is correct;
+        
+        int xMove, yMove;
+        if(xDirection){
+            xMove = 1;//move right
+        }
+        else{
+            xMove = -1;//move left
+        }
+        if(yDIrection){
+            yMove = 1; //move dowm
+        }
+        else{
+            yMove = -1; //move up
+        }
+        int initialX = node->startX;// use for knowing how to move circles
+        
+        while(node->startX != newX){ //while current location haven't reached the final location
+            int lastx, lasty;//trace the last circle to clear its color
+            lastx = node->startX;
+            lasty = node->startY;
+            
+            node->startX = node->startX + xMove;
+            if(xDirection){
+                node->startY = node->stratY + yMove *(yChange * (node->startX - initialX));
+            }
+            else{
+                node->startY = node->stratY + yMove *(yChange * (initialX - node->startX));
+            }
+            //just imagine you made a coordinate axis by the initial x,y location; but y-axis is toward down by meaning increase; and x-axis is toward right by meaning increase
+            /*
+             |
+             -----+---->
+             |
+             |
+             v
+             
+             */
+            drawCircle(lastx,lasty,20,_WHITE,node->value);//clear the last frame circle;
+            plotter.update();
+            refreshTree(root, node);//a new function directly show whole tree without any animation
+            //*Notation:the current movement node not include the refreshTree function, that's why you could
+            //use a parameter for current node to clear that node within your refreshTree function
+            
+            //plotter.update(); //may don't need that if you have this call in your refreshTree function
+            drawCircle(node->startX,node->startY,20,BLACK,node->value); //Note:The color you can choose what you like:)
+            plotter.update();
+            this_thread::sleep_for(chrono::milliseconds(24)); //you can check whether 24 is fluent or not.
+            //Chosing 24 is based on cartoon standard theoretically
+            //Notation: the order of clearing, refreshing, drawing circles is important, since the circle of movement
+            //should always on the toppest layer of graph, so that refresh can be work;
+            //Note: Based on above order logic, the circile which is covered by the other circle after finishing slideNode,
+            //and now becomes the current movement object; you can use the same logic to show the circle which is covered by
+            //the other to show move that circle to its final location; This way could be easier.
+        }
+        /*I know this could be very difficult. I have tried so many different animation ways, and I think above method could be easiest one, but you still could meet some special cases. Please let me know if you don't understand above logic. Finally, or we can just reshow the whole tree when any insertion or deletion occur, just like you showed us after class today.:) That's also cool, and I like your animation.
+         */
+    }
