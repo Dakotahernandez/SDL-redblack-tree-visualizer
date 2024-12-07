@@ -1,140 +1,98 @@
-Performance Analysis (15%): Thorough analysis of performance under different scenarios.
-Provide a detailed report that includes:
-Explanation of how the Red-Black Tree works.
-Design decisions in implementing the tree and visualization.
-Description of the interface and how it supports user interaction.
-Performance analysis with the chosen datasets.
-Reflections on the challenges encountered and how they were resolved.
-Test your Red-Black Tree with at least three datasets:
-Randomly generated integers.
-A dataset of increasing order.
-A dataset of decreasing order.
-Analyze the performance in terms of:
-Height of the tree.
-Average and worst-case time complexity for insertions and deletions.
-Number of rotations and re-colorings.
-
-
 Performance Analysis Report
-1. Explanation of How the Red-Black Tree Works
+1. Introduction
+The Red-Black Tree is a self-balancing binary search tree designed to maintain efficient search, insertion, and deletion operations within logarithmic time complexity. This report evaluates the performance of a Red-Black Tree implementation, highlights design choices, and discusses its behavior under various datasets.
 
-The Red-Black Tree is a self-balancing binary search tree that adheres to the following properties:
-
-Node Colors: Every node is either red or black.
-Root Property: The root of the tree is always black.
-Red-Black Property: No two consecutive red nodes are allowed on any path.
-Black-Height Property: Every path from a node to its descendant leaves contains the same number of black nodes.
-Balance Property: The longest path from the root to a leaf is at most twice the length of the shortest path.
-To ensure these properties, the tree performs rotations (left and right) and re-colorings during insertions and deletions:
-
-Insertion: Nodes are inserted like a binary search tree, followed by rebalancing if the Red-Black properties are violated.
+2. How the Red-Black Tree Works
+The Red-Black Tree follows these core properties:
+Node Colors: Nodes are either red or black.
+Root Property: The root node is always black.
+Red-Black Property: No two consecutive red nodes exist on any path.
+Black-Height Property: All paths from a node to its descendant leaves have the same number of black nodes.
+Balance Property: The longest path from the root to a leaf is at most twice the shortest path.
+Balancing Operations:
+Insertion: Nodes are added as in a binary search tree. Violations of Red-Black properties are resolved with rotations and re-coloring.
 Deletion: Nodes are removed similarly, and balancing is restored using rotations and re-coloring.
-These properties guarantee that the height of the tree remains logarithmic, ensuring efficient search, insertion, and deletion operations.
+These methods make sutr the tree remains balanced, supporting efficient O(log n) operations for search, insertion, and deletion.
 
-2. Design Decisions
+3. Design Decisions
+Templated Implementation:
+THe templated Red_Black_Tree class supports various data types.
+Duplicate values are inserted as separate nodes without additional modifications to visualization or logic.
+Visualization Framework:
+SDL (Simple DirectMedia Layer) is used for rendering real-time animations.
+Custom graphical functions (drawCircle, drawLine, etc.) represent nodes, edges, and balancing actions dynamically.
+Input Constraints:
+The system accepts positive integers (up to 4 digits) to maintain clarity in visualization.
+Modular Design:
+Tree logic is separate from visualization logic for improved maintainability and debugging.(Object Oriented Programming in action)
 
-Our implementation focuses on efficiency, flexibility, and user interaction:
-
-Data Structure Implementation: We used a templated Red-Black Tree class to support various data types, though our visualizer is configured for integer inputs.
-Visualization Framework: SDL was chosen for its ability to render real-time animations. Functions like drawCircle, drawLine, and drawRectangle were customized to represent nodes, edges, and actions dynamically.
-Input Constraints: The system accepts positive integers up to 4 digits. This constraint helps manage visual clarity, especially when displaying large trees.
-Modularity: We separated the tree logic from the visualization logic. This modularity makes the system easy to debug, test, and enhance.
-3. Interface Description
-
-Our interface ensures a user-friendly experience:
-
-Interactive Console Input: Users can insert or remove integers by typing I for insertions or R for removals, followed by the desired number.
-Visual Feedback: The visualizer dynamically updates the tree structure after every operation, showcasing node insertions, deletions, and balancing operations.
+4. Interface Description
+Interactive Console Input:
+Users input commands (I <number> for insertion, R <number> for removal) through the console.
+Graphical Feedback:
+The tree dynamically redraws after each operation, showcasing balancing changes 
 Graphical Elements:
-Buttons labeled "Insert" and "Remove" to guide user actions.
-Animated transitions for new nodes and balancing processes, such as gliding a node to its new position.
-The title "Red-Black Tree" displayed using custom graphics for a polished user experience.
-4. Performance Analysis with Datasets
+Smooth animations depict node movements and balancing operations.in
 
-We tested the Red-Black Tree with three datasets:
-
+5. Performance Analysis
+Datasets Used
 Random Dataset: Randomly generated integers.
 Increasing Order Dataset: Sequential integers in ascending order.
 Decreasing Order Dataset: Sequential integers in descending order.
-Metrics Analyzed:
+Metrics Analyzed
+Tree Height: Maintained logarithmic growth across all datasets.
+Time Complexity: Average and worst-case complexities for insertions and deletions.
+Balancing Operations: Number of rotations and re-colorings performed.
+Results Summary
+Dataset
+Tree Height
+Avg. Time Complexity
+Worst-Case Time Complexity
+Rotations
+Re-colorings
+Random
+Logarithmic
+O(log n)
+O(log n)
+Moderate
+Moderate
+Increasing Order
+Logarithmic
+O(log n)
+O(log n)
+Higher
+Higher
+Decreasing Order
+Logarithmic
+O(log n)
+O(log n)
+Higher
+Higher
 
-Tree Height: The height of the tree after inserting all elements.
-Average and Worst-Case Time Complexity: For insertions and deletions.
-Rotations and Re-colorings: Number of balancing operations performed during tree adjustments.
-Results:
 
-Dataset	Tree Height	Avg. Time Complexity	Worst-Case Time Complexity	Rotations	Re-colorings
-Random	Logarithmic	O(log n)	O(log n)	Moderate	Moderate
-Increasing Order	Logarithmic	O(log n)	O(log n)	Higher	Higher
-Decreasing Order	Logarithmic	O(log n)	O(log n)	Higher	Higher
-Insights:
+6. Dataset Insights
+6.1. Random Dataset
+Example Dataset: 234, 1829, 981, 4506, 7398, 3051, 843, 6721, 1502, 8903
+Performance: A well-balanced structure is achieved with moderate rotations and re-colorings. Average and worst-case complexities remain O(log n).
+6.2. Increasing Order Dataset
+Example Dataset: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+Performance: Initially forms a skewed tree, requiring significant balancing. Final structure achieves logarithmic height.
+6.3. Decreasing Order Dataset
+Example Dataset: 10, 9, 8, 7, 6, 5, 4, 3, 2, 1
+Performance: Similar to the increasing order dataset, but requires even more balancing operations due to extreme initial skewing.
+6.4. Edge Cases
+Duplicate Dataset: (e.g., 500, 500, 1000, 1500, 1500, 2000, 2500)
+Duplicates are inserted as separate nodes without distinction.
+Performance: Balancing operations remain consistent with the standard logic.
+Sparse Range Dataset: (e.g., 10, 1000, 20000, 30000, 40000, 50000, 60000)
+Performance: Efficient handling of large numerical ranges, maintaining logarithmic height.
 
-The random dataset resulted in a more balanced tree, requiring fewer rotations and re-colorings.
-Ordered datasets (increasing and decreasing) required more balancing operations due to initial skewing.
-1. Introduction
+7. General Observations
+Height Consistency: The tree consistently maintains logarithmic growth across all datasets.
+Balancing Operations: Ordered datasets (increasing or decreasing) require more rotations and re-colorings compared to random datasets.
+Efficiency: O(log n) complexity is sustained for all operations, showcasing the efficiency  of Red-Black Trees.
 
-To evaluate the performance of our Red-Black Tree implementation, we tested it with three distinct datasets:
-
-Random Dataset
-Increasing Order Dataset
-Decreasing Order Dataset
-Each dataset provides insight into how the Red-Black Tree balances itself and maintains efficiency across different scenarios.
-
-2. Random Dataset
-
-Dataset: 234, 1829, 981, 4506, 7398, 3051, 843, 6721, 1502, 8903
-
-Tree Height: The tree height remains logarithmic due to the inherent balancing properties of the Red-Black Tree.
-Rotations and Re-Colorings: Moderate levels of balancing operations are required as nodes are inserted in no specific order. Rotations and re-colorings are distributed evenly.
-Performance Insights:
-The tree achieves a well-balanced structure.
-Average and worst-case time complexity for insertion and deletion operations is O(log n).
-3. Increasing Order Dataset
-
-Dataset: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-
-Tree Height: Initially, the tree grows linearly, resembling a skewed binary search tree during insertions. However, balancing operations ensure the final structure is logarithmic in height.
-Rotations and Re-Colorings: A higher number of rotations and re-colorings occur compared to the random dataset due to the sequential order of insertions.
-Performance Insights:
-Balancing operations restore the tree to a logarithmic structure.
-Insertions involve more rotations as the tree adjusts from an unbalanced state.
-4. Decreasing Order Dataset
-
-Dataset: 10, 9, 8, 7, 6, 5, 4, 3, 2, 1
-
-Tree Height: Similar to the increasing order dataset, the initial insertions create a skewed tree. Balancing operations quickly adjust the structure to ensure logarithmic height.
-Rotations and Re-Colorings: This dataset requires even more rotations and re-colorings than the increasing order dataset, as the tree starts from an extreme unbalanced state.
-Performance Insights:
-The tree efficiently handles worst-case scenarios.
-Rotations are frequent but necessary to maintain Red-Black properties.
-5. Additional Edge Cases
-
-Duplicate Dataset
-Dataset: 500, 500, 1000, 1500, 1500, 2000, 2500
-
-Tree Height: Duplicates are either ignored or handled based on the implementation (e.g., allowed in a multiset or not inserted at all).
-Performance Insights:
-If duplicates are ignored, the balancing operations remain unaffected.
-If duplicates are allowed, the balancing operations increase slightly as additional nodes are handled.
-Sparse Range Dataset
-Dataset: 10, 1000, 20000, 30000, 40000, 50000, 60000
-
-Tree Height: Due to the large range, insertions lead to widely spaced node values. The tree balances efficiently to keep height logarithmic.
-Performance Insights:
-Sparse datasets demonstrate that the Red-Black Tree can handle large numerical ranges without degradation in performance.
-6. General Observations
-
-Height Consistency: Across all datasets, the final height of the tree adheres to logarithmic growth, a key feature of Red-Black Trees.
-Balancing Operations: Sequential datasets (increasing or decreasing) require significantly more balancing than random datasets, as the initial structure skews heavily.
-Efficiency: The tree maintains O(log n) time complexity for all operations, regardless of dataset type, showcasing its robustness.
-7. Conclusion
-
-The Red-Black Tree effectively balances itself under various scenarios. While ordered datasets require more balancing, the tree always converges to a near-optimal height, ensuring efficient operations. These results highlight the strength of Red-Black Trees in managing data dynamically while maintaining consistent performance.
-
-Future tests could include larger datasets and variations in input patterns to further validate performance and scalability.
-
-5. Reflections on Challenges
-
+8. Challenges
 During development, we encountered several challenges:
 While creating the animations, I encountered three main issues: rendering triangles for the arrows, displaying text, and 
 animating over previous frames. The first challenge I had was how to display the arrowheads for the arrows by calculating 
@@ -159,12 +117,11 @@ occurred in an infinite loop with recursion, similarly we solved rotation animat
 time a remove or major movement occurred.
 
 
-6. Conclusion
 
-Our Red-Black Tree visualizer demonstrates the functionality and efficiency of the data structure through real-time visualizations. It provides a clear understanding of tree balancing operations, showcasing the tree's adaptability to various datasets.
+9. Conclusion
+This implementation demonstrates the efficiency of the Red-Black Tree, with its ability to maintain balance and handle duplicates seamlessly. The visualization shows  the tree's dynamic balancing properties, making it an excellent educational tool.
 
-Future Enhancements:
-
-Expand input methods to include mouse interactions for node insertion and removal.
-Incorporate additional performance metrics, such as memory usage and operation duration.
-Allow users to upload custom datasets for testing.
+10. Future Enhancements
+Enable mouse interactions for node insertion/removal.
+Add performance metrics like memory usage and operation duration.
+Allow users to upload custom datasets for advanced testing.
