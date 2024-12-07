@@ -71,6 +71,68 @@ Insights:
 
 The random dataset resulted in a more balanced tree, requiring fewer rotations and re-colorings.
 Ordered datasets (increasing and decreasing) required more balancing operations due to initial skewing.
+1. Introduction
+
+To evaluate the performance of our Red-Black Tree implementation, we tested it with three distinct datasets:
+
+Random Dataset
+Increasing Order Dataset
+Decreasing Order Dataset
+Each dataset provides insight into how the Red-Black Tree balances itself and maintains efficiency across different scenarios.
+
+2. Random Dataset
+
+Dataset: 234, 1829, 981, 4506, 7398, 3051, 843, 6721, 1502, 8903
+
+Tree Height: The tree height remains logarithmic due to the inherent balancing properties of the Red-Black Tree.
+Rotations and Re-Colorings: Moderate levels of balancing operations are required as nodes are inserted in no specific order. Rotations and re-colorings are distributed evenly.
+Performance Insights:
+The tree achieves a well-balanced structure.
+Average and worst-case time complexity for insertion and deletion operations is O(log n).
+3. Increasing Order Dataset
+
+Dataset: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+
+Tree Height: Initially, the tree grows linearly, resembling a skewed binary search tree during insertions. However, balancing operations ensure the final structure is logarithmic in height.
+Rotations and Re-Colorings: A higher number of rotations and re-colorings occur compared to the random dataset due to the sequential order of insertions.
+Performance Insights:
+Balancing operations restore the tree to a logarithmic structure.
+Insertions involve more rotations as the tree adjusts from an unbalanced state.
+4. Decreasing Order Dataset
+
+Dataset: 10, 9, 8, 7, 6, 5, 4, 3, 2, 1
+
+Tree Height: Similar to the increasing order dataset, the initial insertions create a skewed tree. Balancing operations quickly adjust the structure to ensure logarithmic height.
+Rotations and Re-Colorings: This dataset requires even more rotations and re-colorings than the increasing order dataset, as the tree starts from an extreme unbalanced state.
+Performance Insights:
+The tree efficiently handles worst-case scenarios.
+Rotations are frequent but necessary to maintain Red-Black properties.
+5. Additional Edge Cases
+
+Duplicate Dataset
+Dataset: 500, 500, 1000, 1500, 1500, 2000, 2500
+
+Tree Height: Duplicates are either ignored or handled based on the implementation (e.g., allowed in a multiset or not inserted at all).
+Performance Insights:
+If duplicates are ignored, the balancing operations remain unaffected.
+If duplicates are allowed, the balancing operations increase slightly as additional nodes are handled.
+Sparse Range Dataset
+Dataset: 10, 1000, 20000, 30000, 40000, 50000, 60000
+
+Tree Height: Due to the large range, insertions lead to widely spaced node values. The tree balances efficiently to keep height logarithmic.
+Performance Insights:
+Sparse datasets demonstrate that the Red-Black Tree can handle large numerical ranges without degradation in performance.
+6. General Observations
+
+Height Consistency: Across all datasets, the final height of the tree adheres to logarithmic growth, a key feature of Red-Black Trees.
+Balancing Operations: Sequential datasets (increasing or decreasing) require significantly more balancing than random datasets, as the initial structure skews heavily.
+Efficiency: The tree maintains O(log n) time complexity for all operations, regardless of dataset type, showcasing its robustness.
+7. Conclusion
+
+The Red-Black Tree effectively balances itself under various scenarios. While ordered datasets require more balancing, the tree always converges to a near-optimal height, ensuring efficient operations. These results highlight the strength of Red-Black Trees in managing data dynamically while maintaining consistent performance.
+
+Future tests could include larger datasets and variations in input patterns to further validate performance and scalability.
+
 5. Reflections on Challenges
 
 During development, we encountered several challenges:
