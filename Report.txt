@@ -74,11 +74,7 @@ Ordered datasets (increasing and decreasing) required more balancing operations 
 5. Reflections on Challenges
 
 During development, we encountered several challenges:
-
-Rendering Performance: Rendering the tree for large datasets caused delays. We optimized this by batching pixel updates and simplifying animations.
-Balancing Visualization: Representing the balancing operations dynamically was complex. We resolved this by designing animations like glideNode and pulsateOutline to illustrate node adjustments.
-Input Validation: Ensuring only valid integers were entered required robust error handling. We implemented checks for range and type to avoid crashes.
-Despite these challenges, our modular design and team collaboration enabled us to overcome them efficiently.
+.
 
 6. Conclusion
 
