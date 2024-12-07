@@ -13,3 +13,79 @@ Analyze the performance in terms of:
 Height of the tree.
 Average and worst-case time complexity for insertions and deletions.
 Number of rotations and re-colorings.
+
+
+Performance Analysis Report
+1. Explanation of How the Red-Black Tree Works
+
+The Red-Black Tree is a self-balancing binary search tree that adheres to the following properties:
+
+Node Colors: Every node is either red or black.
+Root Property: The root of the tree is always black.
+Red-Black Property: No two consecutive red nodes are allowed on any path.
+Black-Height Property: Every path from a node to its descendant leaves contains the same number of black nodes.
+Balance Property: The longest path from the root to a leaf is at most twice the length of the shortest path.
+To ensure these properties, the tree performs rotations (left and right) and re-colorings during insertions and deletions:
+
+Insertion: Nodes are inserted like a binary search tree, followed by rebalancing if the Red-Black properties are violated.
+Deletion: Nodes are removed similarly, and balancing is restored using rotations and re-coloring.
+These properties guarantee that the height of the tree remains logarithmic, ensuring efficient search, insertion, and deletion operations.
+
+2. Design Decisions
+
+Our implementation focuses on efficiency, flexibility, and user interaction:
+
+Data Structure Implementation: We used a templated Red-Black Tree class to support various data types, though our visualizer is configured for integer inputs.
+Visualization Framework: SDL was chosen for its ability to render real-time animations. Functions like drawCircle, drawLine, and drawRectangle were customized to represent nodes, edges, and actions dynamically.
+Input Constraints: The system accepts positive integers up to 4 digits. This constraint helps manage visual clarity, especially when displaying large trees.
+Modularity: We separated the tree logic from the visualization logic. This modularity makes the system easy to debug, test, and enhance.
+3. Interface Description
+
+Our interface ensures a user-friendly experience:
+
+Interactive Console Input: Users can insert or remove integers by typing I for insertions or R for removals, followed by the desired number.
+Visual Feedback: The visualizer dynamically updates the tree structure after every operation, showcasing node insertions, deletions, and balancing operations.
+Graphical Elements:
+Buttons labeled "Insert" and "Remove" to guide user actions.
+Animated transitions for new nodes and balancing processes, such as gliding a node to its new position.
+The title "Red-Black Tree" displayed using custom graphics for a polished user experience.
+4. Performance Analysis with Datasets
+
+We tested the Red-Black Tree with three datasets:
+
+Random Dataset: Randomly generated integers.
+Increasing Order Dataset: Sequential integers in ascending order.
+Decreasing Order Dataset: Sequential integers in descending order.
+Metrics Analyzed:
+
+Tree Height: The height of the tree after inserting all elements.
+Average and Worst-Case Time Complexity: For insertions and deletions.
+Rotations and Re-colorings: Number of balancing operations performed during tree adjustments.
+Results:
+
+Dataset	Tree Height	Avg. Time Complexity	Worst-Case Time Complexity	Rotations	Re-colorings
+Random	Logarithmic	O(log n)	O(log n)	Moderate	Moderate
+Increasing Order	Logarithmic	O(log n)	O(log n)	Higher	Higher
+Decreasing Order	Logarithmic	O(log n)	O(log n)	Higher	Higher
+Insights:
+
+The random dataset resulted in a more balanced tree, requiring fewer rotations and re-colorings.
+Ordered datasets (increasing and decreasing) required more balancing operations due to initial skewing.
+5. Reflections on Challenges
+
+During development, we encountered several challenges:
+
+Rendering Performance: Rendering the tree for large datasets caused delays. We optimized this by batching pixel updates and simplifying animations.
+Balancing Visualization: Representing the balancing operations dynamically was complex. We resolved this by designing animations like glideNode and pulsateOutline to illustrate node adjustments.
+Input Validation: Ensuring only valid integers were entered required robust error handling. We implemented checks for range and type to avoid crashes.
+Despite these challenges, our modular design and team collaboration enabled us to overcome them efficiently.
+
+6. Conclusion
+
+Our Red-Black Tree visualizer demonstrates the functionality and efficiency of the data structure through real-time visualizations. It provides a clear understanding of tree balancing operations, showcasing the tree's adaptability to various datasets.
+
+Future Enhancements:
+
+Expand input methods to include mouse interactions for node insertion and removal.
+Incorporate additional performance metrics, such as memory usage and operation duration.
+Allow users to upload custom datasets for testing.
