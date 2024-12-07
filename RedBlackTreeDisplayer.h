@@ -134,16 +134,25 @@ public:
      * precondition: means of drawing letters, scale is 2
      * postcondition: button is drawn at desired location
      */
-    void removeButton(){
-        int x = 100;
-        int y = 650;
-        drawRectangle(x-28, y-30, 120, 60, CUTE_PINK);
-        drawLetter(x    , y, 'R', 2, DARK_PINK);
-        drawLetter(x +12, y, 'e', 2, DARK_PINK);
-        drawLetter(x +25, y, 'm', 2, DARK_PINK);
-        drawLetter(x +37, y, 'o', 2, DARK_PINK);
-        drawLetter(x +49, y, 'v', 2, DARK_PINK);
-        drawLetter(x +61, y, 'e', 2, DARK_PINK);
+   void removeLabel(){
+        int x = 200;
+        int y = 300;
+        drawLetter(x    , y, 'P', 2, DARK_PINK);
+        drawLetter(x +12, y, 'r', 2, DARK_PINK);
+        drawLetter(x +24, y, 'e', 2, DARK_PINK);
+        drawLetter(x +36, y, 's', 2, DARK_PINK);
+        drawLetter(x +48, y, 's', 2, DARK_PINK);
+        drawLetter(x +68, y, '[', 2, DARK_PINK); //+20
+        drawLetter(x +78, y, 'R', 2, DARK_PINK);
+        drawLetter(x +88, y, ']', 2, DARK_PINK);
+        drawLetter(x+106, y, 't', 2, DARK_PINK); //+18
+        drawLetter(x+118, y, 'o', 2, DARK_PINK);
+        drawLetter(x+138, y, 'R', 2, DARK_PINK); //+18
+        drawLetter(x+150, y, 'e', 2, DARK_PINK); //+12
+        drawLetter(x+162, y, 'm', 2, DARK_PINK); //+12
+        drawLetter(x+174, y, 'o', 2, DARK_PINK); //+12
+        drawLetter(x+186, y, 'v', 2, DARK_PINK); //+12
+        drawLetter(x+198, y, 'e', 2, DARK_PINK); //+12
     }
     
     /*
@@ -152,16 +161,26 @@ public:
      * precondition: means of drawing letters, scale is 2
      * postcondition: button is drawn at desired location
      */
-    void inputButton(){
-        int x = 300;
-        int y = 650;
-        drawRectangle(x-28, y-30, 120, 60, CUTE_PINK);
-        drawLetter(x    , y, 'I', 2, DARK_PINK);
-        drawLetter(x +13, y, 'n', 2, DARK_PINK);
-        drawLetter(x +26, y, 's', 2, DARK_PINK);
-        drawLetter(x +38, y, 'e', 2, DARK_PINK);
-        drawLetter(x +50, y, 'r', 2, DARK_PINK);
-        drawLetter(x +60, y, 't', 2, DARK_PINK);
+    void inputLabel(){
+        int x = 200;
+        int y = 330;
+        //drawRectangle(x-28, y-30, 120, 60, CUTE_PINK);
+        drawLetter(x    , y, 'P', 2, DARK_PINK);
+        drawLetter(x +12, y, 'r', 2, DARK_PINK);
+        drawLetter(x +24, y, 'e', 2, DARK_PINK);
+        drawLetter(x +36, y, 's', 2, DARK_PINK);
+        drawLetter(x +48, y, 's', 2, DARK_PINK);
+        drawLetter(x +68, y, '[', 2, DARK_PINK); //+20
+        drawLetter(x +78, y, 'I', 2, DARK_PINK);
+        drawLetter(x +88, y, ']', 2, DARK_PINK);
+        drawLetter(x+106, y, 't', 2, DARK_PINK); //+18
+        drawLetter(x+118, y, 'o', 2, DARK_PINK);
+        drawLetter(x+138, y, 'I', 2, DARK_PINK); //+18
+        drawLetter(x+150, y, 'n', 2, DARK_PINK); //+12
+        drawLetter(x+162, y, 's', 2, DARK_PINK); //+12
+        drawLetter(x+174, y, 'e', 2, DARK_PINK); //+12
+        drawLetter(x+186, y, 'r', 2, DARK_PINK); //+12
+        drawLetter(x+198, y, 't', 2, DARK_PINK); //+12
     }
     
     /*
@@ -428,8 +447,8 @@ public:
     // Recursively displays each node in the tree
     void displayNode(Node<T>* node, int x, int y, int horizontal_gap, int radius) {
         titleName();
-        removeButton();
-        inputButton();
+        removeLabel();
+        inputLabel();
         
         glideNode(50, 50, 300, 300, CUTE_PINK);
         
