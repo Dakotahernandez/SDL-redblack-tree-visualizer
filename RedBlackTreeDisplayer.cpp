@@ -553,6 +553,74 @@ void RedBlackTreeDisplayer<T>::drawLetter(int x, int y, char letter, int scale, 
         cubeIt(x          , y+2 *scale, c);
         cubeIt(x          , y+3 *scale, c);
         cubeIt(x          , y+4 *scale, c);
+    }else if(letter == 'P'){
+        /*
+         IIII-  y-4
+         I---I  y-3
+         I---I  y-2
+         I---I  y-1
+         IIII-  y
+         I----  y+1
+         I----  y+2
+         I----  y+3
+         I----  y+4
+         */
+        cubeIt(x -2 *scale, y-4 *scale, c);
+        cubeIt(x -1 *scale, y-4 *scale, c);
+        cubeIt(x          , y-4 *scale, c);
+        cubeIt(x +1 *scale, y-4 *scale, c);
+        cubeIt(x -2 *scale, y-3 *scale, c);
+        cubeIt(x +2 *scale, y-3 *scale, c);
+        cubeIt(x -2 *scale, y-2 *scale, c);
+        cubeIt(x +2 *scale, y-2 *scale, c);
+        cubeIt(x -2 *scale, y-1 *scale, c);
+        cubeIt(x +2 *scale, y-1 *scale, c);
+        cubeIt(x -2 *scale, y         , c);
+        cubeIt(x -1 *scale, y         , c);
+        cubeIt(x          , y         , c);
+        cubeIt(x +1 *scale, y         , c);
+        cubeIt(x -2 *scale, y+1 *scale, c);
+        cubeIt(x -2 *scale, y+2 *scale, c);
+        cubeIt(x -2 *scale, y+3 *scale, c);
+        cubeIt(x -2 *scale, y+4 *scale, c);
+    }else if(letter == '['){
+        /*
+         --I--  y-4
+         -I---  y-3
+         III--  y-2
+         -II--  y-1
+         -----  y
+         -----  y+1
+         -----  y+2
+         -----  y+3
+         */
+        cubeIt(x          , y-4 *scale, c);
+        cubeIt(x -1 *scale, y-3 *scale, c);
+        cubeIt(x -2 *scale, y-2 *scale, c);
+        cubeIt(x -1 *scale, y-2 *scale, c);
+        cubeIt(x          , y-2 *scale, c);
+        cubeIt(x -1 *scale, y-1 *scale, c);
+        cubeIt(x          , y-1 *scale, c);
+    }else if(letter == ']'){
+        /*
+         --II-  y-4
+         --III  y-3
+         ---I-  y-2
+         --I--  y-1
+         -----  y
+         -----  y+1
+         -----  y+2
+         -----  y+3
+         */
+        cubeIt(x +1 *scale, y-4 *scale, c);
+        cubeIt(x          , y-4 *scale, c);
+        cubeIt(x +2 *scale, y-3 *scale, c);
+        cubeIt(x +1 *scale, y-3 *scale, c);
+        cubeIt(x          , y-3 *scale, c);
+        cubeIt(x +1 *scale, y-2 *scale, c);
+        cubeIt(x          , y-1 *scale, c);
+        
+        
     }
     
 }
