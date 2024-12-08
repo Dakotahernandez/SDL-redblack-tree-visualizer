@@ -619,10 +619,144 @@ void RedBlackTreeDisplayer<T>::drawLetter(int x, int y, char letter, int scale, 
         cubeIt(x          , y-3 *scale, c);
         cubeIt(x +1 *scale, y-2 *scale, c);
         cubeIt(x          , y-1 *scale, c);
+    }else if(letter == 'N'){
+        /*
+         I---I  y-4
+         II--I  y-3
+         II--I  y-2
+         I-I-I  y-1
+         I-I-I  y
+         I--II  y+1
+         I--II  y+2
+         I---I  y+3
+         I---I  y+4
+         */
+        cubeIt(x -2 *scale, y-4 *scale, c);
+        cubeIt(x +2 *scale, y-4 *scale, c);
+        cubeIt(x -2 *scale, y-3 *scale, c);
+        cubeIt(x -1 *scale, y-3 *scale, c);
+        cubeIt(x +2 *scale, y-3 *scale, c);
+        cubeIt(x -2 *scale, y-2 *scale, c);
+        cubeIt(x -1 *scale, y-2 *scale, c);
+        cubeIt(x +2 *scale, y-2 *scale, c);
+        cubeIt(x -2 *scale, y-1 *scale, c);
+        cubeIt(x          , y-1 *scale, c);
+        cubeIt(x +2 *scale, y-1 *scale, c);
+        cubeIt(x -2 *scale, y         , c);
+        cubeIt(x          , y         , c);
+        cubeIt(x +2 *scale, y         , c);
+        cubeIt(x -2 *scale, y+3 *scale, c);
+        cubeIt(x +2 *scale, y+3 *scale, c);
+        cubeIt(x -2 *scale, y+1 *scale, c);
+        cubeIt(x +1 *scale, y+1 *scale, c);
+        cubeIt(x +2 *scale, y+1 *scale, c);
+        cubeIt(x -2 *scale, y+2 *scale, c);
+        cubeIt(x +1 *scale, y+2 *scale, c);
+        cubeIt(x +2 *scale, y+2 *scale, c);
+        cubeIt(x -2 *scale, y+4 *scale, c);
+        cubeIt(x +2 *scale, y+4 *scale, c);
+    }else if(letter == 'w'){
+        /*
+         -----  y-4
+         -----  y-3
+         -----  y-2
+         I---I  y-1
+         I---I  y
+         I---I  y+1
+         I-I-I  y+2
+         II-II  y+3
+         I---I  y+4
+         */
+        cubeIt(x -2 *scale, y-1 *scale, c);
+        cubeIt(x +2 *scale, y-1 *scale, c);
+        cubeIt(x -2 *scale, y         , c);
+        cubeIt(x +2 *scale, y         , c);
+        cubeIt(x -2 *scale, y+1 *scale, c);
+        cubeIt(x +2 *scale, y+1 *scale, c);
+        cubeIt(x -2 *scale, y+2 *scale, c);
+        cubeIt(x          , y+2 *scale, c);
+        cubeIt(x +2 *scale, y+2 *scale, c);
+        cubeIt(x -2 *scale, y+3 *scale, c);
+        cubeIt(x -1 *scale, y+3 *scale, c);
+        cubeIt(x +1 *scale, y+3 *scale, c);
+        cubeIt(x +2 *scale, y+3 *scale, c);
+        cubeIt(x -2 *scale, y+4 *scale, c);
+        cubeIt(x +2 *scale, y+4 *scale, c);
+    }else if(letter == 'g'){
+        /*
+         -III-  y-4
+         I---I  y-3
+         I---I  y-2
+         I---I  y-1
+         I---I  y
+         -IIII  y+1
+         ----I  y+2
+         I---I  y+3
+         -III-  y+4
+         
+         */
+        cubeIt(x -1 *scale, y-4 *scale, c);
+        cubeIt(x          , y-4 *scale, c);
+        cubeIt(x +1 *scale, y-4 *scale, c);
+        cubeIt(x +2 *scale, y-3 *scale, c);
+        cubeIt(x -2 *scale, y-3 *scale, c);
+        cubeIt(x +2 *scale, y-2 *scale, c);
+        cubeIt(x -2 *scale, y-2 *scale, c);
+        cubeIt(x +2 *scale, y-1 *scale, c);
+        cubeIt(x -2 *scale, y-1 *scale, c);
+        cubeIt(x +2 *scale, y      , c);
+        cubeIt(x -2 *scale, y      , c);
         
-        
+        cubeIt(x +2 *scale, y+1 *scale, c);
+        cubeIt(x -1 *scale, y+1 *scale, c);
+        cubeIt(x +1 *scale, y+1 *scale, c);
+        cubeIt(x          , y+1 *scale, c);
+        cubeIt(x +2 *scale, y+2 *scale, c);
+        cubeIt(x -2 *scale, y+3 *scale, c);
+        cubeIt(x +2 *scale, y+3 *scale, c);
+        cubeIt(x -1 *scale, y+4 *scale, c);
+        cubeIt(x          , y+4 *scale, c);
+        cubeIt(x +1 *scale, y+4 *scale, c);
+    }else if(letter == 'i'){
+        /*
+         -----  y-4
+         --I--  y-3
+         -----  y-2
+         --I--  y-1
+         --I--  y
+         --I--  y+1
+         --I--  y+2
+         --I--  y+3
+         --I--  y+4
+         */
+        cubeIt(x          , y-3 *scale, c);
+        cubeIt(x          , y-1 *scale, c);
+        cubeIt(x          , y         , c);
+        cubeIt(x          , y+1 *scale, c);
+        cubeIt(x          , y+2 *scale, c);
+        cubeIt(x          , y+3 *scale, c);
+        cubeIt(x          , y+4 *scale, c);
+    }else if(letter == ':'){
+        /*
+         -----  y-4
+         --II-  y-3
+         --II-  y-2
+         -----  y-1
+         -----  y
+         -----  y+1
+         --II-  y+2
+         --II-  y+3
+         -----  y+4
+         */
+        cubeIt(x          , y-3 *scale, c);
+        cubeIt(x          , y-2 *scale, c);
+        cubeIt(x          , y+3 *scale, c);
+        cubeIt(x          , y+2 *scale, c);
+        cubeIt(x +1 *scale, y-3 *scale, c);
+        cubeIt(x +1 *scale, y-2 *scale, c);
+        cubeIt(x +1 *scale, y+3 *scale, c);
+        cubeIt(x +1 *scale, y+2 *scale, c);
     }
-    
 }
 
 //Xiangyu added drawNumber in 11/20/2024
