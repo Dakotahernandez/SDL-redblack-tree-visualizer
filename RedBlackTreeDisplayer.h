@@ -278,56 +278,6 @@ private:
         drawCircle(x, y, radius, _WHITE);
     }
     
-    
-    
-    //ADDING NEW FUNC
-    
-    void glideNode(int x1, int y1, int x2, int y2, color c, Red_Black_Tree<T>& tree){
-        int dx = x2 - x1;         //horizontal distance
-        int dy = y2 - y1;         //vertical distance
-        int steps = max(dx, dy);
-        
-        int xRate = dx / steps;
-        int yRate = dy / steps;
-        int x = x1;
-        int y = y1;
-        for(int i = 0; i <= steps; i++){
-            drawCircle(x, y, NODE_RADIUS, c);
-            displayTree(tree);
-            plotter.update();
-            if (i < steps) {
-                drawCircle(x, y, NODE_RADIUS, _WHITE);
-            }
-            x += xRate;
-            y += yRate;
-            plotter.Sleep(5);
-        }
-    }
-    
-    /*
-     //didnt get to implement this function because the draw flat tree func didnt work
-    void glideNodeNUM(int x1, int y1, int x2, int y2, color OUTc, color INc, int value){
-        int dx = x2 - x1;         //horizontal distance
-        int dy = y2 - y1;         //vertical distance
-        int steps = max(dx, dy);
-        
-        int xRate = dx / steps;
-        int yRate = dy / steps;
-        int x = x1;
-        int y = y1;
-        for(int i = 0; i <= steps; i++){
-            drawNodeCircle(x, y, NODE_RADIUS, OUTc, INc, value);
-            plotter.update();
-            if(i < steps){
-                drawCircle(x, y, NODE_RADIUS, _WHITE);
-            }
-            x += xRate;
-            y += yRate;
-            plotter.Sleep(5);
-        }
-    }
-    */
-    
     /*
      * description: indicates which node is being currently viewed
      * return: none
@@ -487,7 +437,8 @@ private:
         drawLine(x1, y1, x2, y2, c);
         drawArrowhead(x1, y1, x2, y2, 17, c);
     }
-    
+
+   //can remove this function 
     /*
     void drawTreeFLAT(Node<T>* node, Node<T>* stopNode, int x, int y, int horizontal_gap, int radius) {
         if (node == nullptr) return;
