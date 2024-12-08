@@ -7,7 +7,7 @@
 * Assignment Description: Using SDL, create a red-black tree visualizer using SDL
 * Due Date: 12/10/2024
 * Date Created: 10/09/2024
-* Date Last Modified: 10/16/2024
+* Date Last Modified: 12/08/2024
 */
 #ifndef RedBlackTreeDisplayer_h
 #define RedBlackTreeDisplayer_h
@@ -15,11 +15,6 @@
 #include "Red_Black_Tree.h"
 #include "Constants.h"
 #include <cmath>
-
-struct nodeLocation {
-    
-};
-// Constants for color and spacing
 
 // Class to display a Red-Black Tree using SDL_Plotter
 template <typename T>
@@ -31,11 +26,11 @@ public:
     // Main function to display the Red-Black Tree
     void displayTree(Red_Black_Tree<T>& tree) {
         plotter.clear();
-        displayNode(tree.getRoot(), width / 2, NODE_RADIUS * 2, width / 4, NODE_RADIUS);
+        displayNode(tree, tree.getRoot(), width / 2, NODE_RADIUS * 6, width / 4, NODE_RADIUS);
         plotter.update();
     }
 
-//private:
+private:
     SDL_Plotter& plotter;
     int width, height;
 
@@ -132,11 +127,11 @@ public:
      * description: draws the labeled remove button
      * return: none
      * precondition: means of drawing letters, scale is 2
-     * postcondition: button is drawn at desired location
+     * postcondition: text is drawn at desired location
      */
-   void removeLabel(){
-        int x = 200;
-        int y = 300;
+    void removeLabel(){
+        int x = 90;
+        int y = 610;
         drawLetter(x    , y, 'P', 2, DARK_PINK);
         drawLetter(x +12, y, 'r', 2, DARK_PINK);
         drawLetter(x +24, y, 'e', 2, DARK_PINK);
@@ -162,8 +157,8 @@ public:
      * postcondition: button is drawn at desired location
      */
     void inputLabel(){
-        int x = 200;
-        int y = 330;
+        int x = 90;
+        int y = 640;
         //drawRectangle(x-28, y-30, 120, 60, CUTE_PINK);
         drawLetter(x    , y, 'P', 2, DARK_PINK);
         drawLetter(x +12, y, 'r', 2, DARK_PINK);
@@ -190,8 +185,8 @@ public:
      * postcondition: phrase is drawn at desired location
      */
     void titleName(){
-        int x = 150;
-        int y = 580;
+        int x = 515;
+        int y = 60;
         drawLetter(x    , y, 'R', 2, RED);
         drawLetter(x +12, y, 'e', 2, RED);
         drawLetter(x +24, y, 'd', 2, RED);
@@ -205,6 +200,44 @@ public:
         drawLetter(x+131, y, 'r', 2, N_GRAY);
         drawLetter(x+143, y, 'e', 2, N_GRAY);
         drawLetter(x+155, y, 'e', 2, N_GRAY);
+    }
+    
+    /*
+     * description: draws "Inserting"
+     * return: none
+     * precondition: all letters have means of displaying
+     * postcondition: phrase is drawn at desired location
+     */
+    void newNodeText1(){
+        int x = 600;
+        int y = 610;
+        drawLetter(x   , y, 'I', 2, N_GROU); //+18
+        drawLetter(x+12, y, 'n', 2, N_GROU); //+12
+        drawLetter(x+24, y, 's', 2, N_GROU); //+12
+        drawLetter(x+36, y, 'e', 2, N_GROU); //+12
+        drawLetter(x+48, y, 'r', 2, N_GROU); //+12
+        drawLetter(x+60, y, 't', 2, N_GROU); //+12
+        drawLetter(x+69, y, 'i', 2, N_GROU); //+12
+        drawLetter(x+80, y, 'n', 2, N_GROU); //+12
+        drawLetter(x+92, y+6, 'g', 2, N_GROU); //+12
+    }
+    /*
+     * description: draws "New Node:"
+     * return: none
+     * precondition: all letters have means of displaying
+     * postcondition: phrase is drawn at desired location
+     */
+    void newNodeText2(){
+        int x = 600 + 2;
+        int y = 640;
+        drawLetter(x   , y, 'N', 2, N_GROU); //+12
+        drawLetter(x+12, y, 'e', 2, N_GROU); //+12
+        drawLetter(x+24, y, 'w', 2, N_GROU); //+12
+        drawLetter(x+36+7, y, 'N', 2, N_GROU); //+12
+        drawLetter(x+48+7, y, 'o', 2, N_GROU); //+12
+        drawLetter(x+60+7, y, 'd', 2, N_GROU); //+12
+        drawLetter(x+72+7, y, 'e', 2, N_GROU); //+12
+        drawLetter(x+81+7, y +1, ':', 2, N_GROU); //+12
     }
     
     /*
@@ -230,8 +263,8 @@ public:
          is created. during comparisons it should do the blue outline animation.
          it should be change color to black/red then glide to its new spot
          leaving the space blank/white*/
-        int startX = 50;
-        int startY = 50;
+        int startX = 60;
+        int startY = 60;
         drawNodeCircle(startX, startY, NODE_RADIUS, N_GROU, nodeColor, value);
     }
     
@@ -249,7 +282,7 @@ public:
     
     //ADDING NEW FUNC
     
-    void glideNode(int x1, int y1, int x2, int y2, color c){
+    void glideNode(int x1, int y1, int x2, int y2, color c, Red_Black_Tree<T>& tree){
         int dx = x2 - x1;         //horizontal distance
         int dy = y2 - y1;         //vertical distance
         int steps = max(dx, dy);
@@ -260,6 +293,7 @@ public:
         int y = y1;
         for(int i = 0; i <= steps; i++){
             drawCircle(x, y, NODE_RADIUS, c);
+            displayTree(tree);
             plotter.update();
             if (i < steps) {
                 drawCircle(x, y, NODE_RADIUS, _WHITE);
@@ -271,6 +305,7 @@ public:
     }
     
     /*
+     //didnt get to implement this function because the draw flat tree func didnt work
     void glideNodeNUM(int x1, int y1, int x2, int y2, color OUTc, color INc, int value){
         int dx = x2 - x1;         //horizontal distance
         int dy = y2 - y1;         //vertical distance
@@ -331,6 +366,9 @@ public:
         int err = dx - dy;              //determines whether to move horizontally/vertically
         do{
             plotter.plotPixel(x1, y1, c.R, c.G, c.B);
+            
+            //drawArrowhead(x1, y1, x2, x1+r, y1+r, c);
+            
             plotter.update();
             plotter.Sleep(1);
             int e2 = err * 2;               //error adjustment/movement
@@ -411,6 +449,8 @@ public:
         double uy = dy / length;
         double width = r / sqrt(3.0);
         //added this to move the arrows so theyre not hidden by node circles
+        int x = x2;
+        int y = y2;
         x2 = x2 - static_cast<int>(r * ux);
         y2 = y2 - static_cast<int>(r * uy);
         
@@ -428,6 +468,7 @@ public:
         int Px3 = x2 - static_cast<int>(r * ux) - static_cast<int>(width * vx);
         int Py3 = y2 - static_cast<int>(r * uy) - static_cast<int>(width * vy);
         
+        drawLine(x, y, x2, y2, _WHITE);
         //this actually draws it using the three points
         drawFilledTriangle(Px1, Py1, Px2, Py2, Px3, Py3, c);
     }
@@ -441,19 +482,61 @@ public:
         drawSlowLine(x1, y1, x2, y2, c);
         drawArrowhead(x1, y1, x2, y2, 17, c);
     }
+    //draws an arrow with no animation
+    void drawArrowFLAT(int x1, int y1, int x2, int y2, color c){
+        drawLine(x1, y1, x2, y2, c);
+        drawArrowhead(x1, y1, x2, y2, 17, c);
+    }
     
+    /*
+    void drawTreeFLAT(Node<T>* node, Node<T>* stopNode, int x, int y, int horizontal_gap, int radius) {
+        if (node == nullptr) return;
+        if (node == stopNode) return;
+        //No matter what i do it does not stop always drawing the right sibling branch omg
+        //SHOULD stop drawing at stopNode and stops at its children, but keeps on going
+     // for its sibling's children :(((((
+     
+        // Recursively draw left and right subtrees
+        color nodeColor, nodeOutline;
+        if (node->color == NODE_RED) {
+            nodeOutline = N_REDOU;
+            nodeColor = RED;
+        } else {
+            nodeOutline = BLACK;
+            nodeColor = N_GRAY;
+        }
+        // Draw current node
+        drawNodeCircle(x, y, radius, nodeOutline, nodeColor, node->value);
+
+        // Draw connecting lines to children
+        if (node->left != nullptr && node->left != stopNode) {
+            int childX = x - horizontal_gap;
+            int childY = y + VERTICAL_GAP;
+            drawLine(x, y, childX, childY, LINE_COLOR);
+            drawTreeFLAT(node->left, stopNode, childX, childY, horizontal_gap / 2, radius);
+        }
+
+        // Draw and display the right child
+        if (node->right != nullptr && node->right != stopNode) {
+            int childX = x + horizontal_gap;
+            int childY = y + VERTICAL_GAP;
+            drawLine(x, y, childX, childY, LINE_COLOR);
+            drawTreeFLAT(node->right, stopNode, childX, childY, horizontal_gap / 2, radius);
+        }
+    }*/
     
-    
-    // Recursively displays each node in the tree
-    void displayNode(Node<T>* node, int x, int y, int horizontal_gap, int radius) {
+    /*
+     * description: recursively displays each node in the tree
+     * return: none
+     * precondition: tree's logic has been pre arranged and made
+     * postcondition: tree is drawn
+     */
+    void displayNode(Red_Black_Tree<T>& tree, Node<T>* node, int x, int y, int horizontal_gap, int radius) {
         titleName();
         removeLabel();
         inputLabel();
-        
-        glideNode(50, 50, 300, 300, CUTE_PINK);
-        
         if (node == nullptr) return;
-
+        
         // Determine color based on node color
         color nodeColor, nodeOutline;
         if (node->color == NODE_RED) {
@@ -464,25 +547,49 @@ public:
             nodeColor = N_GRAY;
         }
         
-        // Draw the current node
-        drawNodeCircle(x, y, radius, nodeOutline, nodeColor, node->value);
+        newNodeText1();
+        newNodeText2();
         
-        //SOFIA
-        displayNewNode(N_GREEN, node->value);
-        
-        //blue line for green new node
-        pulsateOutline(50, 50, N_GROU, N_GREEN, node->value);
-        
-        //blue outline for node in tree
+        pulsateOutline(750, 630, N_GROU, N_GREEN, node->value);
+        clearCircle(750, 630, radius+5);
+        //drawRectangle(590, 600, 150, 100, _WHITE);
         pulsateOutline(x, y, nodeOutline, nodeColor, node->value);
+        //drawTreeFLAT(tree.getRoot(), node, WINDOW_WIDTH / 2, NODE_RADIUS * 6, 300, NODE_RADIUS);
         
+        int parentX = 0;
+        int parentY = y - VERTICAL_GAP;
+        //goal is to redraw the arrow from parent node to current node after pulse animation
+        if(node->parent != nullptr){    //if current node is not the root node
+            if(node->parent->left == node){
+                //current node is left child of its parent
+                parentX = x + (horizontal_gap * 2);
+            }else if(node->parent->right == node){
+                //current node is right child of its parent
+                parentX = x - (horizontal_gap * 2);
+            }
+            //redraw arrow that was erased
+            drawArrowFLAT(parentX, parentY, x, y, LINE_COLOR);
+            
+            color parentColor, parentOutline;
+            if (node->parent->color == NODE_RED) {
+                parentOutline = N_REDOU;
+                parentColor = RED;
+            } else {
+                parentOutline = BLACK;
+                parentColor = N_GRAY;
+            }
+            //redraw parent and child that was covered by arrow lines
+            drawNodeCircle(parentX, parentY, radius, parentOutline, parentColor, (node->parent)->value);
+            drawNodeCircle(x, y, radius, nodeOutline, nodeColor, node->value);
+        }
         
         // Draw and display the left child
         if (node->left != nullptr) {
             int childX = x - horizontal_gap;
             int childY = y + VERTICAL_GAP;
             drawArrow(x, y, childX, childY, LINE_COLOR);
-            displayNode(node->left, childX, childY, horizontal_gap / 2, radius);
+            drawNodeCircle(x, y, radius, nodeOutline, nodeColor, node->value);
+            displayNode(tree, node->left, childX, childY, horizontal_gap / 2, radius);
         }
 
         // Draw and display the right child
@@ -490,7 +597,8 @@ public:
             int childX = x + horizontal_gap;
             int childY = y + VERTICAL_GAP;
             drawArrow(x, y, childX, childY, LINE_COLOR);
-            displayNode(node->right, childX, childY, horizontal_gap / 2, radius);
+            drawNodeCircle(x, y, radius, nodeOutline, nodeColor, node->value);
+            displayNode(tree, node->right, childX, childY, horizontal_gap / 2, radius);
         }
     }
 };
