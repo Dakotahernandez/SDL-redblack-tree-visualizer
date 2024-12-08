@@ -159,7 +159,6 @@ private:
     void inputLabel(){
         int x = 90;
         int y = 640;
-        //drawRectangle(x-28, y-30, 120, 60, CUTE_PINK);
         drawLetter(x    , y, 'P', 2, DARK_PINK);
         drawLetter(x +12, y, 'r', 2, DARK_PINK);
         drawLetter(x +24, y, 'e', 2, DARK_PINK);
@@ -259,10 +258,6 @@ private:
      * postcondition: node is drawn at inital location before placement
      */
     void displayNewNode(const color nodeColor, int value){
-        /*this is a green node in the top left that is created when a new node
-         is created. during comparisons it should do the blue outline animation.
-         it should be change color to black/red then glide to its new spot
-         leaving the space blank/white*/
         int startX = 60;
         int startY = 60;
         drawNodeCircle(startX, startY, NODE_RADIUS, N_GROU, nodeColor, value);
@@ -284,8 +279,7 @@ private:
      * precondition: valid xy coordinates
      * postcondition: blue outline animation around node 2 times
      */
-    void pulsateOutline(int x, int y, color OC, color IC, int value) {
-        //NODE_RADIUS == 20
+    void pulsateOutline(int x, int y, color OC, color IC, int value){
         for(int i = 0; i < 2; i++){     //two cycles
             for(int i = 0; i < 10; i++){    //grows
                 plotter.update();
@@ -301,6 +295,25 @@ private:
             }
         }
     }
+    void PUSLATECIRCLE(Node<T>* node, int x, int y, int horizontal_gap, color OC, color IC) {
+        //NODE_RADIUS == 20
+        for(int i = 0; i < 2; i++){     //two cycles
+            for(int i = 0; i < 10; i++){    //grows
+                plotter.update();
+                plotter.Sleep(20);
+                drawCircle(x, y, NODE_RADIUS + i, PO_BLUE);  //outline
+                drawNodeCircle(x, y, NODE_RADIUS, OC, IC, node->value);
+            }
+            for(int i = 10; i > 0; i--){    //shrinks
+                plotter.update();
+                plotter.Sleep(20);
+                drawCircle(x, y, NODE_RADIUS + i, _WHITE);  //deletes
+                redrawNodes(node, x, y, horizontal_gap, true);
+                drawNodeCircle(x, y, NODE_RADIUS, OC, IC, node->value); //node over
+            }
+        }
+    }
+    
     
     /*
      * description: draws line with slow animation for arrows
@@ -308,17 +321,17 @@ private:
      * precondition: valid xy coordinates
      * postcondition: line is incrementally drawn from one point to next
      */
-    void drawSlowLine(int x1, int y1, int x2, int y2, color c) {
+    void drawSlowLine(int x1, int y1, int x2, int y2, color c, Node<T>* node, color OC, color IC) {
         int dx = abs(x2 - x1);          //horizontal distance
         int dy = abs(y2 - y1);          //vertical distance
         int sx = (x1 < x2) ? 1 : -1;    //-1 move left, 1 move right
         int sy = (y1 < y2) ? 1 : -1;    //-1 move up, 1 move down
         int err = dx - dy;              //determines whether to move horizontally/vertically
+        int x = x1;
+        int y = y1;
         do{
             plotter.plotPixel(x1, y1, c.R, c.G, c.B);
-            
-            //drawArrowhead(x1, y1, x2, x1+r, y1+r, c);
-            
+            drawNodeCircle(x, y, NODE_RADIUS, OC, IC, node->value);
             plotter.update();
             plotter.Sleep(1);
             int e2 = err * 2;               //error adjustment/movement
@@ -419,6 +432,8 @@ private:
         int Py3 = y2 - static_cast<int>(r * uy) - static_cast<int>(width * vy);
         
         drawLine(x, y, x2, y2, _WHITE);
+        drawLine(x, y, x2+1, y2+1, _WHITE);
+        drawLine(x, y, x2-1, y2-1, _WHITE);
         //this actually draws it using the three points
         drawFilledTriangle(Px1, Py1, Px2, Py2, Px3, Py3, c);
     }
@@ -428,8 +443,8 @@ private:
      * precondition: valid points xy coordinates
      * postcondition: arrow is drawn pointing in specific direction
      */
-    void drawArrow(int x1, int y1, int x2, int y2, color c){
-        drawSlowLine(x1, y1, x2, y2, c);
+    void drawArrow(int x1, int y1, int x2, int y2, color c, Node<T>* node, color OC, color IC){
+        drawSlowLine(x1, y1, x2, y2, c, node, OC, IC);
         drawArrowhead(x1, y1, x2, y2, 17, c);
     }
     //draws an arrow with no animation
@@ -438,16 +453,13 @@ private:
         drawArrowhead(x1, y1, x2, y2, 17, c);
     }
 
-   //can remove this function 
     /*
-    void drawTreeFLAT(Node<T>* node, Node<T>* stopNode, int x, int y, int horizontal_gap, int radius) {
-        if (node == nullptr) return;
-        if (node == stopNode) return;
-        //No matter what i do it does not stop always drawing the right sibling branch omg
-        //SHOULD stop drawing at stopNode and stops at its children, but keeps on going
-     // for its sibling's children :(((((
-     
-        // Recursively draw left and right subtrees
+     * description: redraws parent and/or child node
+     * return: none
+     * precondition: node tree exists
+     * postcondition: used inbetween other animation frames to redraw
+     */
+    void redrawNodes(Node<T>* node, int x, int y, int horizontal_gap, bool display){
         color nodeColor, nodeOutline;
         if (node->color == NODE_RED) {
             nodeOutline = N_REDOU;
@@ -456,26 +468,68 @@ private:
             nodeOutline = BLACK;
             nodeColor = N_GRAY;
         }
-        // Draw current node
-        drawNodeCircle(x, y, radius, nodeOutline, nodeColor, node->value);
-
-        // Draw connecting lines to children
-        if (node->left != nullptr && node->left != stopNode) {
-            int childX = x - horizontal_gap;
-            int childY = y + VERTICAL_GAP;
-            drawLine(x, y, childX, childY, LINE_COLOR);
-            drawTreeFLAT(node->left, stopNode, childX, childY, horizontal_gap / 2, radius);
+        int parentX = 0;
+        int parentY = y - VERTICAL_GAP;
+        //goal is to redraw the arrow from parent node to current node after pulse animation
+        if(node->parent != nullptr){    //if current node is not the root node
+            if(node->parent->left == node){
+                //current node is left child of its parent
+                parentX = x + (horizontal_gap * 2);
+            }else if(node->parent->right == node){
+                //current node is right child of its parent
+                parentX = x - (horizontal_gap * 2);
+            }
+            //redraw arrow that was erased
+            drawArrowFLAT(parentX, parentY, x, y, LINE_COLOR);
+            
+            color parentColor, parentOutline;
+            if (node->parent->color == NODE_RED) {
+                parentOutline = N_REDOU;
+                parentColor = RED;
+            } else {
+                parentOutline = BLACK;
+                parentColor = N_GRAY;
+            }
+            //redraw parent and child that was covered by arrow lines
+            drawNodeCircle(parentX, parentY, NODE_RADIUS, parentOutline, parentColor, (node->parent)->value);
+            if(display){
+                //child
+                drawNodeCircle(x, y, NODE_RADIUS, nodeOutline, nodeColor, node->value);
+            }
         }
+    }
 
-        // Draw and display the right child
-        if (node->right != nullptr && node->right != stopNode) {
-            int childX = x + horizontal_gap;
-            int childY = y + VERTICAL_GAP;
-            drawLine(x, y, childX, childY, LINE_COLOR);
-            drawTreeFLAT(node->right, stopNode, childX, childY, horizontal_gap / 2, radius);
+    /*
+     * description: moves a node smoothly from one place to next
+     * return: none
+     * precondition: node tree exists
+     * postcondition: a node stays at its final location
+     */
+    void glideNodeNUM(int x1, int y1, int x2, int y2, color OUTc, color INc, Node<T>* node, int horizontal_gap){
+        float dx = x2 - x1;         //horizontal distance
+        float dy = y2 - y1;         //vertical distance
+        float steps = max(abs(dx), abs(dy));
+        
+        float xRate = dx / steps;
+        float yRate = dy / steps;
+        float x = x1;
+        float y = y1;
+
+        
+        for(int i = 0; i <= steps; i++){
+            drawNodeCircle(x, y, NODE_RADIUS, OUTc, INc, node->value);
+            plotter.update();
+            if(i < steps){
+                drawCircle(x, y, NODE_RADIUS+2, _WHITE);
+                redrawNodes(node, x2, y2, horizontal_gap, false);
+                newNodeText1();
+                newNodeText2();
+            }
+            x += xRate;
+            y += yRate;
+            plotter.Sleep(1);
         }
-    }*/
-    
+    }
     /*
      * description: recursively displays each node in the tree
      * return: none
@@ -504,41 +558,15 @@ private:
         pulsateOutline(750, 630, N_GROU, N_GREEN, node->value);
         clearCircle(750, 630, radius+5);
         //drawRectangle(590, 600, 150, 100, _WHITE);
-        pulsateOutline(x, y, nodeOutline, nodeColor, node->value);
-        //drawTreeFLAT(tree.getRoot(), node, WINDOW_WIDTH / 2, NODE_RADIUS * 6, 300, NODE_RADIUS);
         
-        int parentX = 0;
-        int parentY = y - VERTICAL_GAP;
-        //goal is to redraw the arrow from parent node to current node after pulse animation
-        if(node->parent != nullptr){    //if current node is not the root node
-            if(node->parent->left == node){
-                //current node is left child of its parent
-                parentX = x + (horizontal_gap * 2);
-            }else if(node->parent->right == node){
-                //current node is right child of its parent
-                parentX = x - (horizontal_gap * 2);
-            }
-            //redraw arrow that was erased
-            drawArrowFLAT(parentX, parentY, x, y, LINE_COLOR);
-            
-            color parentColor, parentOutline;
-            if (node->parent->color == NODE_RED) {
-                parentOutline = N_REDOU;
-                parentColor = RED;
-            } else {
-                parentOutline = BLACK;
-                parentColor = N_GRAY;
-            }
-            //redraw parent and child that was covered by arrow lines
-            drawNodeCircle(parentX, parentY, radius, parentOutline, parentColor, (node->parent)->value);
-            drawNodeCircle(x, y, radius, nodeOutline, nodeColor, node->value);
-        }
+        glideNodeNUM(750, 630, x, y, N_GROU, N_GREEN, node, horizontal_gap);
+        PUSLATECIRCLE(node, x, y, horizontal_gap, nodeOutline, nodeColor);
         
         // Draw and display the left child
         if (node->left != nullptr) {
             int childX = x - horizontal_gap;
             int childY = y + VERTICAL_GAP;
-            drawArrow(x, y, childX, childY, LINE_COLOR);
+            drawArrow(x, y, childX, childY, LINE_COLOR, node, nodeOutline, nodeColor);
             drawNodeCircle(x, y, radius, nodeOutline, nodeColor, node->value);
             displayNode(tree, node->left, childX, childY, horizontal_gap / 2, radius);
         }
@@ -547,7 +575,7 @@ private:
         if (node->right != nullptr) {
             int childX = x + horizontal_gap;
             int childY = y + VERTICAL_GAP;
-            drawArrow(x, y, childX, childY, LINE_COLOR);
+            drawArrow(x, y, childX, childY, LINE_COLOR, node, nodeOutline, nodeColor);
             drawNodeCircle(x, y, radius, nodeOutline, nodeColor, node->value);
             displayNode(tree, node->right, childX, childY, horizontal_gap / 2, radius);
         }
@@ -555,5 +583,3 @@ private:
 };
 
 #endif /* RedBlackTreeDisplayer_h */
-
-
