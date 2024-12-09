@@ -6,14 +6,8 @@ The goal of this project is to implement a Red-Black Tree data structure and vis
 - To understand the properties of Red-Black Trees.
 - Implement insertion, deletion, and rebalancing operations.
 - Create a visual representation of the tree using `SDL_Plotter`.
-
-## To do list <br />
--get sdl working on everything on everyones computers <br />
--understand redblack trees<br />
--build working redblack tree<br />
--have sdl screen recieve data that effects red black tree<br />
--have sdl display tree<br />
-
+Below is image of the red black tree with a random data set 
+<img width="1189" alt="Screenshot 2024-12-09 at 9 36 35 AM" src="https://github.com/user-attachments/assets/ca21d6f1-490e-49e7-b433-5e5d7b05ccd2">
 ### Documentation Standard
 
 #### Comments
@@ -104,4 +98,5 @@ additional notes  <br />
 if you cant find your paths for the search paths you can search for your search paths in your console with  <br />
 find / -name "SDL2" 2>/dev/null <br />
 
-<img width="1189" alt="Screenshot 2024-12-09 at 9 36 35 AM" src="https://github.com/user-attachments/assets/ca21d6f1-490e-49e7-b433-5e5d7b05ccd2">
+
+
