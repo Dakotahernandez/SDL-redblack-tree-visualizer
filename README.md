@@ -104,3 +104,4 @@ additional notes  <br />
 if you cant find your paths for the search paths you can search for your search paths in your console with  <br />
 find / -name "SDL2" 2>/dev/null <br />
 
+<img width="1189" alt="Screenshot 2024-12-09 at 9 36 35 AM" src="https://github.com/user-attachments/assets/ca21d6f1-490e-49e7-b433-5e5d7b05ccd2">
