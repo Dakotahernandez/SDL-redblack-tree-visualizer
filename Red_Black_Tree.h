@@ -22,39 +22,135 @@ template <typename T>
 class Red_Black_Tree {
 private:
     Node<T>* root; // Pointer to the root of the tree
-
-    // Balancing after insertion
+    /*
+     * description: Balances the tree after insertion to maintain Red-Black properties.
+     * return: void
+     * precondition: Node exists and has been inserted.
+     * postcondition: Tree maintains Red-Black properties.
+     */
     void balance(Node<T>* node);
 
-    // Right rotation
+    /*
+     * description: Performs a right rotation around the given node.
+     * return: void
+     * precondition: Node exists and has a left child.
+     * postcondition: Subtree is rotated to the right.
+     */
     void rightRotate(Node<T>* node);
 
-    // Left rotation
+    /*
+     * description: Performs a left rotation around the given node.
+     * return: void
+     * precondition: Node exists and has a right child.
+     * postcondition: Subtree is rotated to the left.
+     */
     void leftRotate(Node<T>* node);
 
-    // Helper function to replace one subtree with another
+    /*
+     * description: Replaces one subtree with another in the tree.
+     * return: void
+     * precondition: Both nodes u and v are valid.
+     * postcondition: Subtree rooted at u is replaced by subtree rooted at v.
+     */
     void transplant(Node<T>* u, Node<T>* v);
 
-    // Helper function to find the minimum node in a subtree
+    /*
+     * description: Finds the minimum node in a subtree.
+     * return: Node<T>*
+     * precondition: Node exists.
+     * postcondition: Returns the node with the smallest value in the subtree.
+     */
     Node<T>* minimum(Node<T>* node);
 
-    // Balancing the tree after deletion
+    /*
+     * description: Balances the tree after a deletion to maintain Red-Black properties.
+     * return: void
+     * precondition: A node has been removed.
+     * postcondition: Tree maintains Red-Black properties.
+     */
     void balanceAfterDelete(Node<T>* node, Node<T>* parent);
 
 public:
-    // Constructors and Destructor
+    /*
+     * description: Default constructor initializing an empty tree.
+     * return: Constructor
+     * precondition: None
+     * postcondition: Tree is initialized with a null root.
+     */
     Red_Black_Tree();
+
+    /*
+     * description: Constructor initializing a tree with a single root node.
+     * return: Constructor
+     * precondition: None
+     * postcondition: Tree is initialized with a root node of the given value.
+     */
     Red_Black_Tree(T rootValue);
+
+    /*
+     * description: Copy constructor creating a deep copy of another Red-Black Tree.
+     * return: Constructor
+     * precondition: Another tree exists.
+     * postcondition: A deep copy of the tree is created.
+     */
     Red_Black_Tree(const Red_Black_Tree& other);
+
+    /*
+     * description: Move constructor transferring ownership of another tree.
+     * return: Constructor
+     * precondition: Another tree exists.
+     * postcondition: Ownership of the tree is transferred.
+     */
     Red_Black_Tree(Red_Black_Tree&& other);
+
+    /*
+     * description: Destructor freeing all nodes in the tree.
+     * return: Destructor
+     * precondition: None
+     * postcondition: All nodes are deleted, and memory is freed.
+     */
     ~Red_Black_Tree();
 
-    // Public methods
+    /*
+     * description: Inserts a value into the tree and balances it.
+     * return: void
+     * precondition: Value is valid.
+     * postcondition: Value is inserted, and tree maintains Red-Black properties.
+     */
     void insert(T value);
+
+    /*
+     * description: Removes a value from the tree and balances it.
+     * return: void
+     * precondition: Value exists in the tree.
+     * postcondition: Value is removed, and tree maintains Red-Black properties.
+     */
     void remove(T value);
+
+    /*
+     * description: Clears the tree by deleting all nodes.
+     * return: void
+     * precondition: Tree exists.
+     * postcondition: All nodes are deleted, and the tree is empty.
+     */
     void clear();
+
+    /*
+     * description: Retrieves the root node of the tree.
+     * return: Node<T>*
+     * precondition: Tree exists.
+     * postcondition: Returns a pointer to the root node.
+     */
     Node<T>* getRoot() const;
+
+    /*
+     * description: Searches for a value in the tree.
+     * return: bool
+     * precondition: Tree exists.
+     * postcondition: Returns true if value is found, otherwise false.
+     */
     bool search(const T& value) const;
+
 };
 
 // Constructors
